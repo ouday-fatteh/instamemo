@@ -1,0 +1,11 @@
+.posts__main {
+    position: relative;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    min-height: 90vh;
+    top: 53px;
+    left:11%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
