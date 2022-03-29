@@ -42,7 +42,7 @@
 .Navbar__user-area {
     width :30px;
     height: 30px;
-    border-radius: 50%;
+    border-radius: 10px;
     background-color: azure;
     cursor: pointer;
 }

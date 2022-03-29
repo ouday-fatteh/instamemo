@@ -25,7 +25,7 @@
 .post__user-image {
     width:30px;
     height: 30px;
-    border-radius: 50%;
+    border-radius: 10px;
     background-color: azure;
     margin-left: 5px;
     -webkit-box-sizing: border-box;
