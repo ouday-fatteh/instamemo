@@ -10,17 +10,20 @@ import { useState } from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
 
 
-const Navbar = () => {
+const Navbar = (currentId , setCurrentId) => {
    const [togglePostCr,setTogglePostCr] = useState(false);
     const togglePostCreation = () => {
         setTogglePostCr(!togglePostCr);
+    }
+    const handlepostclick = (value) => {
+        setTogglePostCr(value);
     }
     return(
         <div className="Navbar__main">
             <IconContext.Provider  value={{ color: "white",size : 40 ,className: "Navbar__icons"}}>
           <div className='closemodal' style={{display:togglePostCr ? 'block' : 'none'}}><VscChromeClose onClick={() => {togglePostCreation()}}/></div>
           </IconContext.Provider>
-            <PostForm clicked={togglePostCr}/>
+            <PostForm componentNature='nav'  handlepostclick={handlepostclick} clicked={togglePostCr}/>
             <div className="Navbar__logo">
                 <h2>Memogram</h2>
             </div>

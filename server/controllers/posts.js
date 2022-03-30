@@ -28,10 +28,43 @@ export const createPost = async (req,res) => {
 
   // Updating posts
 
-  export const updatePost = async (req,res) => {
-    const { id: _id } = req.params;
-    const post = req.body;
-    if(mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post found with that id');
-    const updatedPost = await postMessage.findByIdAndUpdate(_id,post,{new:true});
+  export const updatePost = async (req, res) => {
+    const { id } = req.params;
+    const { title, message, creator, selectedFile, tags } = req.body;
+    
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+    const updatedPost = { creator, title, message, tags, selectedFile, _id: id };
+
+    await PostMessage.findByIdAndUpdate(id, updatedPost, { new: true });
+
     res.json(updatedPost);
-  }
+}
+
+// Liking posts
+
+  export const likePost = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+  
+  const post = await PostMessage.findById(id);
+
+  const updatedPost = await PostMessage.findByIdAndUpdate(id, { likeCount: post.likeCount + 1 }, { new: true });
+  
+  res.json(updatedPost);
+}
+
+// Unliking posts 
+
+export const unlikePost = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+  
+  const post = await PostMessage.findById(id);
+
+  const updatedPost = await PostMessage.findByIdAndUpdate(id, { likeCount: post.likeCount - 1 }, { new: true });
+  
+  res.json(updatedPost);
+}

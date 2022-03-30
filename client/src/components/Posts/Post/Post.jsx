@@ -5,15 +5,28 @@ import { AiOutlineHeart , AiFillHeart , AiOutlineComment , AiOutlineShareAlt} fr
 import { BsBookmarkHeart } from 'react-icons/bs';
 import { VscSmiley } from 'react-icons/vsc';
 import { BiMessageSquareAdd } from 'react-icons/bi';
+import { likePost , unLikePost} from '../../../actions/posts';
 import moment from 'moment';
 import { useState } from 'react';
-const Post = (props) => {
+import { useDispatch } from 'react-redux';
+
+
+const Post = (props)=> {
+    const dispatch = useDispatch();
     const [didLike,setDidLike] = useState(false);
-
-    const handleLikes = () => {
-        setDidLike(!didLike);
+    const handleLikes = (value) => {
+        setDidLike(value);
+        if(!didLike){
+            dispatch(likePost(props.id));
+        }
+        else{
+            dispatch(unLikePost(props.id));
+        }
+     
     }
-
+    const handleedit = () => {
+        props.setCurrentId(props.id);
+    }
     return (
         <div className="post__main">
             <div className='post__user-info'>
@@ -23,7 +36,9 @@ const Post = (props) => {
                 <span>{moment(props.createdAt).fromNow()}</span>
                 </div>
                 <IconContext.Provider  value={{ color: "white",size : 25 ,className: "Navbar__icons"}}>
-                <div className='post__user-menu'><HiOutlineDotsHorizontal /></div>
+                <div className='post__user-menu' onClick={() => props.setIsEditing(true)}>
+                <HiOutlineDotsHorizontal onClick= {() => handleedit()}/>
+                </div>
                 </IconContext.Provider>
             </div>
 
@@ -35,8 +50,8 @@ const Post = (props) => {
             
                 <div className='post__image-action-bar-left'>
                     {!didLike ? (
-                <AiOutlineHeart onClick={() => {handleLikes()}}/>
-                    ) : (<AiFillHeart onClick={() => {handleLikes()}}/>)}
+                <AiOutlineHeart onClick={() => {handleLikes(true)}}/>
+                    ) : (<AiFillHeart onClick={() => {handleLikes(false)}}/>)}
                 <AiOutlineComment />
                 <AiOutlineShareAlt />
                 </div>
@@ -47,7 +62,7 @@ const Post = (props) => {
             </div>
             <div className='post__likeCount'>
                 <div>{props.likeCount} Likes</div>
-                <div>{(props.comments).length} Comments</div>
+                <div>{props.comments ? props.comments.length : '0'} Comments</div>
                 <div>{props.shares} Shares</div>
             </div>
             <div className='post__tags'>
