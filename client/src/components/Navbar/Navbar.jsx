@@ -20,29 +20,39 @@ const Navbar = (currentId , setCurrentId) => {
     }
     return(
         <div className="Navbar__main">
-            <IconContext.Provider  value={{ color: "white",size : 40 ,className: "Navbar__icons"}}>
-          <div className='closemodal' style={{display:togglePostCr ? 'block' : 'none'}}><VscChromeClose onClick={() => {togglePostCreation()}}/></div>
+            <IconContext.Provider  value={{ color: "black",size : 40 ,className: "Navbar__icons"}}>
+          <div className='closemodal' style={{display:togglePostCr ? 'white' : 'none'}}><VscChromeClose onClick={() => {togglePostCreation()}}/></div>
           </IconContext.Provider>
             <PostForm componentNature='nav'  handlepostclick={handlepostclick} clicked={togglePostCr}/>
+            {/*------------Logo----------*/}
             <div className="Navbar__logo">
                 <h2>Memogram</h2>
             </div>
+            {/*------------Search----------*/}
             <div className="Navbar__search">
                 <input type='text' placeholder='Search posts,users ...'></input>
             </div>
+            {/*------------Menu including user----------*/}
+            <div className='Navbar__right'>
             <div className='Navbar__user_menu'>
-            <IconContext.Provider value={{ color: "white",size : 30 ,className: "Navbar__icons"}}>
                 <div className="Navbar__icon-menu">
-                    <HiOutlineHome />
-                    <HiOutlineChat />
-                    <HiOutlineCollection onClick={()=> {togglePostCreation()}}/>
-                    <AiOutlineCompass />
-                    <HiOutlineHeart />
+                    <IconContext.Provider value={{ color: "white",size : 18 }}>
+                        <div className='Navbar__icon-create'onClick={()=> {togglePostCreation()}}>
+                            <HiOutlineCollection />
+                            <div>Create</div>
+                        </div>
+                    </IconContext.Provider>
+                    <IconContext.Provider value={{ color: "rgb(60, 60, 60)",size : 25 ,className: "Navbar__icons"}}>
+                        <HiOutlineHome />
+                        <HiOutlineChat />
+                        <AiOutlineCompass />
+                        <HiOutlineHeart />
+                    </IconContext.Provider>
                 </div>
-            </IconContext.Provider>
-                <div className="Navbar__user-area">
+            </div>
+            <div className="Navbar__user-area">
 
-                </div>
+            </div>
             </div>
         </div>
     );

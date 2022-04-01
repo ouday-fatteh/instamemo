@@ -7,13 +7,26 @@ import { VscSmiley } from 'react-icons/vsc';
 import { BiMessageSquareAdd } from 'react-icons/bi';
 import { likePost , unLikePost} from '../../../actions/posts';
 import moment from 'moment';
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 
 const Post = (props)=> {
     const dispatch = useDispatch();
     const [didLike,setDidLike] = useState(false);
+    const [tags,setTags] = useState([]);
+
+    useEffect(()=>{
+    const lowerArray =  props.tags[0].toLowerCase();
+    const arraystring = lowerArray.replaceAll(" ","");
+    const newtag = arraystring.split(",");
+    setTimeout(() => {
+      setTags(newtag);  
+    }, 1000);
+    
+    },[props.tags]);
+  
+
     const handleLikes = (value) => {
         setDidLike(value);
         if(!didLike){
@@ -30,12 +43,14 @@ const Post = (props)=> {
     return (
         <div className="post__main">
             <div className='post__user-info'>
-                <div className='post__user-image'></div>
-                <div className='post__user-name-time'>
-                <span>User_name</span>
-                <span>{moment(props.createdAt).fromNow()}</span>
+                <div className='post__user-wrapper'>
+                    <div className='post__user-image'></div>
+                    <div className='post__user-name-time'>
+                    <span>User_name</span>
+                    <span>{moment(props.createdAt).fromNow()}</span>
+                    </div>
                 </div>
-                <IconContext.Provider  value={{ color: "white",size : 25 ,className: "Navbar__icons"}}>
+                <IconContext.Provider  value={{ color: "rgb(60, 60, 60)",size : 25 ,className: "Navbar__icons"}}>
                 <div className='post__user-menu' onClick={() => props.setIsEditing(true)}>
                 <HiOutlineDotsHorizontal onClick= {() => handleedit()}/>
                 </div>
@@ -45,7 +60,7 @@ const Post = (props)=> {
             <div className='post__image' style={{objectFit: 'contain'}}>
             <img style={{height:'400px'}} alt={props.title} src={props.image}></img>
             </div>
-            <IconContext.Provider  value={{ color: "white",size : 25 ,className: "Navbar__icons"}}>
+            <IconContext.Provider  value={{ color: "rgb(60, 60, 60)",size : 25 ,className: "Navbar__icons"}}>
             <div className='post__image-action-bar'>
             
                 <div className='post__image-action-bar-left'>
@@ -61,12 +76,12 @@ const Post = (props)=> {
            
             </div>
             <div className='post__likeCount'>
-                <div>{props.likeCount} Likes</div>
+                <div>{props.likeCount ? props.likeCount : 0} Likes</div>
                 <div>{props.comments ? props.comments.length : '0'} Comments</div>
-                <div>{props.shares} Shares</div>
+                <div>{props.shares ? props.shares : 0} Shares</div>
             </div>
             <div className='post__tags'>
-            {props.tags.map((tag) => {const firstclear = tag.replaceAll(' ','');const clear = firstclear.replaceAll(',',' #'); return '#'+clear;})}
+            {tags ? tags.map((tag) => `#${tag} `) : ''}
             </div>
             <div className='post__title'>
             {props.title}

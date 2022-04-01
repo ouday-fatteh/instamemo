@@ -8707,6 +8707,11 @@
   dependencies:
     "punycode" "^2.1.0"
 
+"use-state-if-mounted@^1.0.4":
+  "integrity" "sha512-odkuB5IZxABvag46XZmUyY+FrienKt+6f2JAo52pvpU5C32K99EvADg1VxjIUaVbh5eHhOVQQ6q4wWm2WEZYyg=="
+  "resolved" "https://registry.npmjs.org/use-state-if-mounted/-/use-state-if-mounted-1.0.4.tgz"
+  "version" "1.0.4"
+
 "util-deprecate@^1.0.1", "util-deprecate@^1.0.2", "util-deprecate@~1.0.1":
   "integrity" "sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8="
   "resolved" "https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz"
