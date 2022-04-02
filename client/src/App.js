@@ -11,7 +11,7 @@ const App = () => {
         dispatch(getPosts());
     },[currentId,dispatch]);
     return (
-            <div>
+            <div style={{backgroundColor:"#efefef"}}>
                 <Navbar/>
                 <Posts  setCurrentId={setCurrentId} currentId={currentId}/>
             </div>

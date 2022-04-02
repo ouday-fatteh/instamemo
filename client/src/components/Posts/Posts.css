@@ -8,6 +8,7 @@
     left:10%;
     overflow-y: hidden;
     overflow-x: hidden;
-    background-color: transparent;
+    background-color:#efefef;
     padding-bottom: 20px;
+    scroll-behavior: smooth;
 }

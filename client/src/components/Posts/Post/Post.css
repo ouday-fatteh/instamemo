@@ -97,14 +97,14 @@
     display: flex;
     align-items: center;
     gap:0.5rem;
-    border-top: 1px solid rgb(216, 215, 215);
+    
 }
-#comment-input {
+.comment-input {
     width:85%;
-    background-color: transparent;
+    background-color: rgb(255, 255, 255);
     outline: none;
     border: none;
-    color:white;
+    color:rgb(63, 63, 63);
 }
 .post__likeCount {
     margin-left:10px;
