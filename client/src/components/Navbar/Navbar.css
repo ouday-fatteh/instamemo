@@ -12,6 +12,7 @@
     align-items: center;
     justify-content: space-evenly;
     z-index:1500;
+    border-bottom: 1px solid #dbdbdb;
 }
 .Navbar__logo h2 {
     color: rgb(0, 0, 0);
@@ -80,4 +81,10 @@
     align-items: center;
     justify-content: center;
     margin-top: 2px;
+}
+.my-message{
+    z-index: 5000;
+}
+.ant-message{
+    z-index: 5000;
 }

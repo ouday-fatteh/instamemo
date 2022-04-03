@@ -175,3 +175,9 @@
   justify-content: center;
   align-items: center;
 }
+.my-message{
+  z-index: 5000;
+}
+.ant-message{
+  z-index: 5000;
+}

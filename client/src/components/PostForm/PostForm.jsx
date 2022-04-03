@@ -7,6 +7,7 @@ import { TextField , Button  } from '@material-ui/core';
 import { Upload, message } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 
+
  const PostForm = (props) => {
      const [postData,setPostData] = useStateIfMounted({title:'',message:'',tags:'',selectedFile:''});
      const post = useSelector((state) => props.currentId ? state.posts.find(post => post._id === props.currentId) : null);
@@ -15,6 +16,17 @@ import { InboxOutlined } from '@ant-design/icons';
      const [image,setImage] = useState(null);
      const { Dragger } = Upload;
      const url = 'https://api.cloudinary.com/v1_1/instamemo/image/upload/';
+
+     const key = 'updatable';
+
+
+     const openMessage = (msg) => {
+        message.loading({ content: 'Loading...', key ,style:{zIndex:9999}});
+        console.log('loading');
+        setTimeout(() => {
+          message.success({ content: msg, key, duration: 2 ,style:{zIndex:9999} });
+        }, 1000);
+      };
         
      const handleImageUpload = async (options) => {
         const { onSuccess, onError} = options;
@@ -28,12 +40,15 @@ import { InboxOutlined } from '@ant-design/icons';
         })
         .then(res => res.json())
         .then(data => {
+            
             setPostData({...postData,selectedFile:data.url});
             onSuccess(data.statusText);
+            
         })
         .catch(err => {
             console.log(err);
             onError(err);
+            
         })
      }
 
@@ -56,7 +71,6 @@ import { InboxOutlined } from '@ant-design/icons';
             message.error(`${info.file.name} file upload failed.`);
           }
           setImage(info.fileList);
-          info.fileList = "null";
         },
         onDrop(e) {
           console.log('Dropped files', e.dataTransfer.files);
@@ -90,10 +104,10 @@ import { InboxOutlined } from '@ant-design/icons';
                 tags:'',
                 selectedFile:''
             });
-
-            
             
      }
+
+
      const animateAndExit = () => {
          if(props.isEditing){
         props.setIsEditing(false);
@@ -108,9 +122,12 @@ import { InboxOutlined } from '@ant-design/icons';
         event.preventDefault();
         if(props.currentId){
             dispatch(updatePost(props.currentId,postData));
+            openMessage('Post Updated');
      }else{
             dispatch(createPost(postData));
+            openMessage('Post Created');     
      }
+     
      setIsSubmitting(true);
      setTimeout(() => {
          setIsSubmitting(false);
@@ -135,7 +152,7 @@ import { InboxOutlined } from '@ant-design/icons';
                 <div className="lds-ripple"><div></div><div></div></div>
             </div>
             ) :null}
-            <div className='PostForm__overlay' onClick={() => {props.componentNature === 'nav' ? props.handlepostclick(false) : props.setIsEditing(false) }} ></div>
+            <div className='PostForm__overlay' onClick={() => {animateAndExit() }} ></div>
             <div className="PostForm__outerBox">
                 <div className='PostForm__Boxheader'>{!props.isEditing ? 'Create a new post' : 'Edit your post'}</div>
                 <div className='PostForm__form'>

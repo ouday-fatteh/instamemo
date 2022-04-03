@@ -8,7 +8,12 @@ import { IconContext } from "react-icons";
 import PostForm from '../PostForm/PostForm'; 
 import { useState } from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
-
+import { Menu, Dropdown, message } from 'antd';
+import {  UserOutlined } from '@ant-design/icons';
+import { RiSettings3Line } from 'react-icons/ri';
+import { MdOutlineHelpOutline } from 'react-icons/md';
+import { BsMoon } from 'react-icons/bs';
+import { BiLogOutCircle } from 'react-icons/bi';
 
 const Navbar = (currentId , setCurrentId) => {
    const [togglePostCr,setTogglePostCr] = useState(false);
@@ -18,8 +23,39 @@ const Navbar = (currentId , setCurrentId) => {
     const handlepostclick = (value) => {
         setTogglePostCr(value);
     }
+
+    function handleButtonClick(e) {
+        message.info('Click on left button.');
+        console.log('click left button', e);
+      }
+      
+      function handleMenuClick(e) {
+        message.info('Click on menu item.');
+        console.log('click', e);
+      }
+
+    const menu = (
+        <Menu onClick={handleMenuClick}>
+          <Menu.Item key="1" icon={<UserOutlined />}>
+            Profile
+          </Menu.Item>
+          <Menu.Item key="2" icon={<RiSettings3Line />}>
+            Settings
+          </Menu.Item>
+          <Menu.Item key="3" icon={<MdOutlineHelpOutline />}>
+            Help & support
+          </Menu.Item>
+          <Menu.Item key="4" icon={<BsMoon />}>
+            Display & accessibility
+          </Menu.Item>
+          <Menu.Item key="5" icon={<BiLogOutCircle />}>
+            Logout
+          </Menu.Item>
+        </Menu>
+      );
+
     return(
-        <div className="Navbar__main">
+        <div id="Navbar__main" className="Navbar__main">
             <IconContext.Provider  value={{ color: "black",size : 40 ,className: "Navbar__icons"}}>
           <div className='closemodal' style={{display:togglePostCr ? 'white' : 'none'}}><VscChromeClose onClick={() => {togglePostCreation()}}/></div>
           </IconContext.Provider>
@@ -50,9 +86,11 @@ const Navbar = (currentId , setCurrentId) => {
                     </IconContext.Provider>
                 </div>
             </div>
-            <div className="Navbar__user-area">
+            <Dropdown getPopupContainer={() => document.getElementById('Navbar__main')} overlay={menu} trigger={['click']}>
+            <div className="Navbar__user-area" >
 
             </div>
+            </Dropdown>
             </div>
         </div>
     );

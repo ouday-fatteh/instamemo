@@ -6,6 +6,7 @@ import { getPosts } from './actions/posts';
 
 const App = () => {
     const [currentId,setCurrentId] = useState(null);
+    const [isDeleting,setIsDeleting] = useState(false);
     const dispatch = useDispatch();
     useEffect (() => {
         dispatch(getPosts());
@@ -13,7 +14,7 @@ const App = () => {
     return (
             <div style={{backgroundColor:"#efefef"}}>
                 <Navbar/>
-                <Posts  setCurrentId={setCurrentId} currentId={currentId}/>
+                <Posts isDeleting={isDeleting} setIsDeleting={setIsDeleting} setCurrentId={setCurrentId} currentId={currentId}/>
             </div>
         );
 }

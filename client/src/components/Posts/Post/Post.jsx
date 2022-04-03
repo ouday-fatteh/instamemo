@@ -5,12 +5,23 @@ import { AiOutlineHeart , AiFillHeart , AiOutlineComment , AiOutlineShareAlt} fr
 import { BsBookmarkHeart } from 'react-icons/bs';
 import { VscSmiley } from 'react-icons/vsc';
 import { BiMessageSquareAdd } from 'react-icons/bi';
-import { likePost , unLikePost} from '../../../actions/posts';
+import { likePost , unLikePost , deletePost , deleteImage} from '../../../actions/posts';
 import moment from 'moment';
 import { useState , useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Menu, Dropdown } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
+import { Menu, Dropdown , message } from 'antd';
+
+const key = 'updatable';
+
+const openMessage = (msg) => {
+    message.loading({ content: 'Loading...', key ,style:{zIndex:9999}});
+    console.log('loading');
+    setTimeout(() => {
+      message.success({ content: msg, key, duration: 2 ,style:{zIndex:9999} });
+    }, 1000);
+  };
+
+
 
 
 
@@ -32,7 +43,6 @@ const Post = (props)=> {
     },[props.tags]);
   
 
-
     const handleLikes = (value) => {
         setDidLike(value);
         if(!didLike){
@@ -43,7 +53,19 @@ const Post = (props)=> {
         }
      
     }
-
+    const handleDelete = () => {
+        const fullUrl = props.image;
+        const image_id = fullUrl.substr(72 + 1);
+        const fetchedImage_id = image_id.substr(0,image_id.length - 4);
+        dispatch(deletePost(props.id));
+        dispatch(deleteImage(fetchedImage_id));
+        props.setCurrentId(0);
+        openMessage('Post Deleted');
+        setTimeout(() => {
+        props.setCurrentId(null);
+        }, 1000);
+        
+    }
     const handleedit = () => {
         props.setCurrentId(props.id);
         props.setIsEditing(true)
@@ -55,7 +77,7 @@ const Post = (props)=> {
           <span onClick={handleedit}>Edit post</span>
         </Menu.Item>
         <Menu.Item key="1">
-          <span>Delete post</span>
+          <span onClick={handleDelete}>Delete post</span>
         </Menu.Item>
         
         <Menu.Item key="3">Report post</Menu.Item>
@@ -68,8 +90,8 @@ const Post = (props)=> {
                 <div className='post__user-wrapper'>
                     <div className='post__user-image'></div>
                     <div className='post__user-name-time'>
-                    <span>User_name</span>
-                    <span>{moment(props.createdAt).fromNow()}</span>
+                    <span id='post__user-name'>User_name</span>
+                    <span id='post__user-time'>{moment(props.createdAt).fromNow()}</span>
                     </div>
                 </div>{/**props.setIsEditing(true)**/}
                 <IconContext.Provider  value={{ color: "rgb(60, 60, 60)",size : 25 ,className: "Navbar__icons"}}>

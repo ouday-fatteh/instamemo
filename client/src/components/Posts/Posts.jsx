@@ -12,11 +12,14 @@ const Posts = (props) => {
     const posts = useSelector((state) => state.posts);
     const [isEditing,setIsEditing] = useState(false);
     const [postId,setPostId] = useState(null);
+    const [refresh,setRefresh] = useState(false);
+    
     useEffect(() => {
-      
+
         props.setCurrentId(postId);
+        props.setIsDeleting(refresh);
       
-    }, [props,postId]);
+    }, [props,postId,refresh]);
     
     return (
       !posts.length  ?  (
@@ -27,9 +30,12 @@ const Posts = (props) => {
         {isEditing ? (<PostForm  componentNature='post' isEditing={isEditing} setIsEditing={setIsEditing} currentId={props.currentId} setCurrentId={setPostId}/>) : null}
         <div className="posts__main">
           
+          {refresh}
           {posts.map((post,index) => {
              return <Post 
              setIsEditing={setIsEditing}
+             setIsDeleting={setRefresh}
+             isDeleting = {refresh}
              setCurrentId = {setPostId}
              id = {post._id}
              key={post._id+index} 
