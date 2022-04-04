@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import './PostForm.css';
 import { useDispatch , useSelector } from 'react-redux';
-import { createPost , updatePost} from '../../actions/posts';
+import { createPost , updatePost , deleteImage} from '../../actions/posts';
 import { useStateIfMounted } from 'use-state-if-mounted';
 import { TextField , Button  } from '@material-ui/core';
 import { Upload, message } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
+
 
 
  const PostForm = (props) => {
@@ -75,7 +76,11 @@ import { InboxOutlined } from '@ant-design/icons';
         onDrop(e) {
           console.log('Dropped files', e.dataTransfer.files);
         },
+        onExit(e) {
+            console.log(e)
+        }
       };
+
 
 
      const handleDisplay = () => {
@@ -97,14 +102,19 @@ import { InboxOutlined } from '@ant-design/icons';
             }
      },[post]);
 
-     const clear = () => {
+     const clear = (e) => {
+        const currentImage = postData.selectedFile;
+        const image_id = currentImage.substr(72 + 1);
+        const fetchedImage_id = image_id.substr(0,image_id.length - 4);
+        if(fetchedImage_id.length){
+        dispatch(deleteImage(fetchedImage_id));
+        }
             setPostData({
                 title:'',
                 message:'',
                 tags:'',
                 selectedFile:''
-            });
-            
+            }); 
      }
 
 
@@ -128,7 +138,7 @@ import { InboxOutlined } from '@ant-design/icons';
             openMessage('Post Created');     
      }
      
-     setIsSubmitting(true);
+     setIsSubmitting(false);
      setTimeout(() => {
          setIsSubmitting(false);
         animateAndExit();
@@ -160,7 +170,7 @@ import { InboxOutlined } from '@ant-design/icons';
                         <TextField required variant='outlined' value = {postData.title} label='Title' onChange={(e) => handlePostData(e,'title')} />
                         <TextField required variant='outlined'  multiline minRows={2} maxRows={4} value = {postData.message} label='Type here your message' onChange={(e) => handlePostData(e,'message')}/>
                         <TextField variant='outlined' value={postData.tags} label='Tags (use comma to seperate)' onChange={(e) => handlePostData(e,'tags')}/>
-                        <div style={{display:'flex',maxWidth:'100%',alignItems:'center',justifyContent:'center',marginTop:'25px'}}>
+                        <div style={{display:'block',maxWidth:'100%',alignItems:'center',justifyContent:'center',marginTop:'25px'}}>
                        {props.componentNature === 'nav' && (
                        <Dragger  {...fprops}>
                             <div className='PostForm__File-dragger'>

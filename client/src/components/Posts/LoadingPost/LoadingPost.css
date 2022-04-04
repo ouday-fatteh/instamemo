@@ -85,7 +85,7 @@
     margin-right: 10px;
 }
 .skeleton__post__message {
-    width: 97%;
+    width: 100%;
     min-height:40px;
     padding-left:10px;
     padding-right:10px;
@@ -98,7 +98,7 @@
 
 
 #comment-input {
-    width:90%;
+    width:98%;
     background-color: transparent;
     outline: none;
     border: none;
@@ -121,4 +121,20 @@
     font-family: 'Open Sans', sans-serif ;
     font-weight: 500;
     cursor: pointer;
+}
+@media screen and (max-width:600px){
+    .skeleton__connectionTimeout{
+        font-size:18px;
+        width: 80%;
+        
+    }
+    .skeleton__post__user-image {
+        width:40px;
+        height: 25px;
+        border-radius: 8px;
+        background-color: #dbdbdb;
+        margin-left: 10px;
+        animation: loading 1s linear infinite alternate;
+        
+    }
 }

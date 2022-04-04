@@ -181,3 +181,18 @@
 .ant-message{
   z-index: 5000;
 }
+div.ant-upload{
+  width: 100%;
+}
+.ant-upload-list-item-name{
+  word-wrap: break-word;
+}
+@media screen and (max-width:600px){
+  .PostForm__outerBox{
+    width: 80%;
+  }
+  @keyframes inn {
+    0%   {width: 80%;opacity: 0;}
+    100%   {width: 80%;opacity: 1;}
+  }
+}

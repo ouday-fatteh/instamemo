@@ -1,4 +1,5 @@
 import './Navbar.css';
+import * as React from 'react';
 import { HiOutlineHome } from 'react-icons/hi';
 import { HiOutlineChat } from 'react-icons/hi';
 import { HiOutlineCollection } from 'react-icons/hi';
@@ -14,9 +15,56 @@ import { RiSettings3Line } from 'react-icons/ri';
 import { MdOutlineHelpOutline } from 'react-icons/md';
 import { BsMoon } from 'react-icons/bs';
 import { BiLogOutCircle } from 'react-icons/bi';
+import { AiOutlineMenu } from 'react-icons/ai';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Box from '@mui/material/Box';
 
 const Navbar = (currentId , setCurrentId) => {
    const [togglePostCr,setTogglePostCr] = useState(false);
+   const [state, setState] = useState({left: false});
+
+   const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setState({ ...state, [anchor]: open });
+  };
+  const list = (anchor) => (
+    <Box
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {['Profile', 'Settings', 'Display & accessibility', 'Help & support'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+              
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {['Change your account', 'Account settings', 'Sign out'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+              
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
     const togglePostCreation = () => {
         setTogglePostCr(!togglePostCr);
     }
@@ -24,11 +72,7 @@ const Navbar = (currentId , setCurrentId) => {
         setTogglePostCr(value);
     }
 
-    function handleButtonClick(e) {
-        message.info('Click on left button.');
-        console.log('click left button', e);
-      }
-      
+
       function handleMenuClick(e) {
         message.info('Click on menu item.');
         console.log('click', e);
@@ -56,6 +100,22 @@ const Navbar = (currentId , setCurrentId) => {
 
     return(
         <div id="Navbar__main" className="Navbar__main">
+            <div>
+               
+               <React.Fragment key={'left'}>
+               <Drawer
+               anchor={'left'}
+               open={state['left']}
+               onClose={toggleDrawer('left', false)}
+                >
+                  {list('left')}
+                </Drawer>
+                </React.Fragment>
+                
+          </div>
+          <div className="Navbar__menu">
+          <AiOutlineMenu onClick={toggleDrawer('left', true)}/>
+          </div>
             <IconContext.Provider  value={{ color: "black",size : 40 ,className: "Navbar__icons"}}>
           <div className='closemodal' style={{display:togglePostCr ? 'white' : 'none'}}><VscChromeClose onClick={() => {togglePostCreation()}}/></div>
           </IconContext.Provider>
