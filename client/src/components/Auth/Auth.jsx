@@ -10,13 +10,17 @@ import GoogleLogin from 'react-google-login';
 import Icon from './Icon';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { signin, signup } from '../../actions/auth';
 
+
+const initialState = { firstName:'',lastName:'',email:'',password:'',confirmPassword:'' };
 
 const Auth = () => {
     const [showPassword, setShowPassword] = useState(false);
-   const [isSignup , setIsSignup ]= useState(false);
-   const dispatch = useDispatch();
-   const history = useHistory();
+    const [isSignup , setIsSignup ]= useState(false);
+    const [formData , setFormData] = useState(initialState);
+    const dispatch = useDispatch();
+    const history = useHistory();
 
    const inputprops = {
     endAdornment: (
@@ -31,17 +35,23 @@ const Auth = () => {
     ),
    }
    
-   const handleShowPassword = () => {
-       setShowPassword(!showPassword);
-   }
+  
 
 
    const handleSubmit = (e) => {
+       e.preventDefault();
+       if(isSignup){
+           dispatch(signup(formData,history));
+           history.push('/');
+       }else{
+           dispatch(signin(formData,history));
+           history.push('/');
+       }
 
    }
 
    const handleChange = (e) => {
-
+         setFormData({...formData,[e.target.name]:e.target.value});
    }
 
    const switchMode = () => {
@@ -73,8 +83,8 @@ const Auth = () => {
         <Typography variant='h6'>{!isSignup ? 'Sign In' : 'Signup'}</Typography>
         {isSignup && (
             <div style={{display:'flex',flexDirection:'row',gap:'0.5rem'}}>
-            <TextField name = 'firstname' label = 'First name' onChange = {handleChange} variant = 'outlined' style={{width:'50%'}} required autoFocus/>
-            <TextField name = 'lastname' label = 'Last name' onChange = {handleChange} variant = 'outlined' style={{width:'50%'}} required />
+            <TextField name = 'firstName' label = 'First name' onChange = {handleChange} variant = 'outlined' style={{width:'50%'}} required autoFocus/>
+            <TextField name = 'lastName' label = 'Last name' onChange = {handleChange} variant = 'outlined' style={{width:'50%'}} required />
             </div>          
         )}
         <TextField name='email' style ={{width: '100%'}} label='Email' type='email' onChange={handleChange} variant = 'outlined' fullwidth required autoFocus />

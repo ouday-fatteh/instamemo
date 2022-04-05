@@ -1,12 +1,14 @@
 import axios from 'axios';
 
+const API = axios.create({baseURL: 'http://localhost:5000/api' });
 
-const url = 'http://localhost:5000/api/posts';
+export const fetchPosts = () => API.get('/posts');
+export const createPosts = (newPost) => API.post('/posts',newPost);
+export const updatePosts = (id,updatedPost) => API.patch(`/posts/${id}`,updatedPost);
+export const likePosts = (id) => API.patch(`/posts/${id}/like`);
+export const unLikePosts = (id) => API.patch(`/posts/${id}/unlike`);
+export const deletePosts = (id) => API.delete(`/posts/${id}`);
+export const deleteImage = (id) => API.delete(`/posts/image/${id}`);
 
-export const fetchPosts = () => axios.get(url);
-export const createPosts = (newPost) => axios.post(url,newPost);
-export const updatePosts = (id,updatedPost) => axios.patch(`${url}/${id}`,updatedPost);
-export const likePosts = (id) => axios.patch(`${url}/${id}/like`);
-export const unLikePosts = (id) => axios.patch(`${url}/${id}/unlike`);
-export const deletePosts = (id) => axios.delete(`${url}/${id}`);
-export const deleteImage = (id) => axios.delete(`${url}/image/${id}`);
+export const signin = (formData) => API.post('/user/signin',formData);
+export const signup = (formData) => API.post('/user/signup',formData);

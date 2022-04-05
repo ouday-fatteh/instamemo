@@ -167,7 +167,12 @@ const Navbar = (currentId , setCurrentId) => {
             </div>
             <Dropdown getPopupContainer={() => document.getElementById('Navbar__main')} overlay={menu} trigger={['click']}>
             <div className="Navbar__user-area" >
+              {user.result.profileImageUrl !== "" ? (
               <img style={{width:'30px',height:'30px',borderRadius:'10px'}} alt={user.result.name} src={user.result.imageUrl}></img>
+              ) : (
+              <div style={{width:'30px',height:'30px',color:'white',borderRadius:'10px',backgroundColor:'red',display:'flex',justifyContent:'center',alignItems:'center'}}>
+                  {user.result.name[0].toUpperCase()}
+                </div>)}
             </div>
             </Dropdown>
             </div>
