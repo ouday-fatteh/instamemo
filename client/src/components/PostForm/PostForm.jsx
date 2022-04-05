@@ -16,6 +16,7 @@ import { InboxOutlined } from '@ant-design/icons';
      const [isSubmitting,setIsSubmitting] = useState(false);
      const [image,setImage] = useState(null);
      const { Dragger } = Upload;
+     const user = JSON.parse(localStorage.getItem('profile'));
      const url = 'https://api.cloudinary.com/v1_1/instamemo/image/upload/';
 
      const key = 'updatable';
@@ -131,10 +132,10 @@ import { InboxOutlined } from '@ant-design/icons';
      const handleSubmit = (event) => {
         event.preventDefault();
         if(props.currentId){
-            dispatch(updatePost(props.currentId,postData));
+            dispatch(updatePost(props.currentId,{...postData , name : user?.result?.name}));
             openMessage('Post Updated');
      }else{
-            dispatch(createPost(postData));
+            dispatch(createPost({...postData , creator : user?.result?.name}));
             openMessage('Post Created');     
      }
      

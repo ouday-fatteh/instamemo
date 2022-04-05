@@ -7,7 +7,7 @@ import auth from '../middleware/auth.js';
  const router = express.Router();
 
 router.get ('/posts' , getPosts);
-router.post ('/posts' , createPost);
+router.post ('/posts' ,auth, createPost);
 router.patch('/posts/:id' ,auth, updatePost);
 router.patch('/posts/:id/like' ,auth, likePost);
 router.patch('/posts/:id/unlike' ,auth, unlikePost);

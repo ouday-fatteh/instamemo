@@ -2,7 +2,7 @@ import './Post.css';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { IconContext } from "react-icons";
 import { AiOutlineHeart , AiFillHeart , AiOutlineComment , AiOutlineShareAlt} from "react-icons/ai";
-import { BsBookmarkHeart } from 'react-icons/bs';
+import { BsBookmarkHeart, BsDisplay } from 'react-icons/bs';
 import { VscSmiley } from 'react-icons/vsc';
 import { BiMessageSquareAdd } from 'react-icons/bi';
 import { likePost , unLikePost , deletePost , deleteImage} from '../../../actions/posts';
@@ -88,9 +88,11 @@ const Post = (props)=> {
         <div className="post__main">
             <div className='post__user-info'>
                 <div className='post__user-wrapper'>
-                    <div className='post__user-image'></div>
+                    <div className='post__user-image' style={{backgroundColor:'red',justifyContent:'center',alignItems:'center' ,color:'white' ,display:'flex'}}>
+                      {props.creator && props.creator.charAt(0).toUpperCase()}
+                    </div>
                     <div className='post__user-name-time'>
-                    <span id='post__user-name'>User_name</span>
+                    <span id='post__user-name'>{props.creator}</span>
                     <span id='post__user-time'>{moment(props.createdAt).fromNow()}</span>
                     </div>
                 </div>{/**props.setIsEditing(true)**/}

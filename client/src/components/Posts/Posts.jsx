@@ -45,6 +45,7 @@ const Posts = (props) => {
              createdAt={post.createdAt}
              likeCount={post.likeCount}
              comments={post.comments}
+             creator={post.creator}
              shares={post.shareCount}
              tags={post.tags}
              />

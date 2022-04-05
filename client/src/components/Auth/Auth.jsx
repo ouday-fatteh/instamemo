@@ -87,8 +87,8 @@ const Auth = () => {
             <TextField name = 'lastName' label = 'Last name' onChange = {handleChange} variant = 'outlined' style={{width:'50%'}} required />
             </div>          
         )}
-        <TextField name='email' style ={{width: '100%'}} label='Email' type='email' onChange={handleChange} variant = 'outlined' fullwidth required autoFocus />
-        <TextField name='password' style ={{width: '100%'}} label='Password' type={showPassword ? 'text' : 'password'} onChange={handleChange}  fullwidth required variant='outlined' 
+        <TextField name='email' style ={{width: '100%'}} label='Email' type='email' onChange={handleChange} variant = 'outlined'  required autoFocus />
+        <TextField name='password' style ={{width: '100%'}} label='Password' type={showPassword ? 'text' : 'password'} onChange={handleChange}  required variant='outlined' 
         InputProps =  {inputprops}/>
         {isSignup && (
         <TextField name='confirmPassword' style ={{width: '100%' }} label='Confirm Password' type={showPassword ? 'text' : 'password'} onChange={handleChange}  required variant='outlined'/>
