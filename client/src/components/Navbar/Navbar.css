@@ -95,6 +95,24 @@
 .Navbar__menu{
     display:none;
 }
+#Navbar__user_menu-signin{
+    cursor: pointer;
+    height: 30px;
+    width: 80px;
+    border-radius: 4px;
+    background-color: rgb(30, 90, 255);
+    border:1px solid #dbdbdb;
+    color: white;
+}
+#Navbar__user_menu-signup{
+    cursor: pointer;
+    height: 30px;
+    width: 80px;
+    border-radius: 4px;
+    background-color: rgb(23, 145, 18);
+    border:1px solid #dbdbdb;
+    color: white;
+}
 @media screen and (max-width: 600px){
     .Navbar__main {
         height: 50px;

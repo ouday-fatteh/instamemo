@@ -1,21 +1,20 @@
 import Navbar from "./components/Navbar/Navbar";
-import Posts from "./components/Posts/Posts";
-import { useDispatch } from 'react-redux';
-import { useEffect, useState } from "react";
-import { getPosts } from './actions/posts';
+import Home from "./components/Home/Home";
+import Auth from "./components/Auth/Auth";
+import { BrowserRouter , Route, Switch } from "react-router-dom";
 
 const App = () => {
-    const [currentId,setCurrentId] = useState(null);
-    const [isDeleting,setIsDeleting] = useState(false);
-    const dispatch = useDispatch();
-    useEffect (() => {
-        dispatch(getPosts());
-    },[currentId,dispatch]);
+
     return (
+        <BrowserRouter>
             <div style={{backgroundColor:"#efefef"}}>
                 <Navbar/>
-                <Posts isDeleting={isDeleting} setIsDeleting={setIsDeleting} setCurrentId={setCurrentId} currentId={currentId}/>
+                <Switch>
+                    <Route path="/" exact component={Home}/>
+                    <Route path="/auth" component={Auth}/>
+                </Switch>
             </div>
+        </BrowserRouter>
         );
 }
 

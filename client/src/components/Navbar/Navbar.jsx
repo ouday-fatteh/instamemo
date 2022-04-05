@@ -1,5 +1,6 @@
 import './Navbar.css';
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { HiOutlineHome } from 'react-icons/hi';
 import { HiOutlineChat } from 'react-icons/hi';
 import { HiOutlineCollection } from 'react-icons/hi';
@@ -7,7 +8,6 @@ import { AiOutlineCompass } from 'react-icons/ai';
 import { HiOutlineHeart } from 'react-icons/hi';
 import { IconContext } from "react-icons";
 import PostForm from '../PostForm/PostForm'; 
-import { useState } from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
 import { Menu, Dropdown, message } from 'antd';
 import {  UserOutlined } from '@ant-design/icons';
@@ -23,10 +23,24 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Box from '@mui/material/Box';
+import { Link , useHistory , useLocation} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+
 
 const Navbar = (currentId , setCurrentId) => {
    const [togglePostCr,setTogglePostCr] = useState(false);
    const [state, setState] = useState({left: false});
+   const [user,setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+   const dispatch = useDispatch();
+   const history = useHistory();
+   const location = useLocation();
+   
+
+   useEffect(() => {
+        const token = user?.token;
+        setUser(JSON.parse(localStorage.getItem('profile')));
+    },[location])
 
    const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -72,16 +86,20 @@ const Navbar = (currentId , setCurrentId) => {
         setTogglePostCr(value);
     }
 
+    const logout = () => {
+        dispatch({type:'LOGOUT'});
+        history.push('/auth');
+        setUser(null);
+        message.success('Logged out Successfully');
+    }
 
-      function handleMenuClick(e) {
-        message.info('Click on menu item.');
-        console.log('click', e);
-      }
+
+  
 
     const menu = (
-        <Menu onClick={handleMenuClick}>
+        <Menu >
           <Menu.Item key="1" icon={<UserOutlined />}>
-            Profile
+            {user ? user.result.name :''}
           </Menu.Item>
           <Menu.Item key="2" icon={<RiSettings3Line />}>
             Settings
@@ -92,7 +110,7 @@ const Navbar = (currentId , setCurrentId) => {
           <Menu.Item key="4" icon={<BsMoon />}>
             Display & accessibility
           </Menu.Item>
-          <Menu.Item key="5" icon={<BiLogOutCircle />}>
+          <Menu.Item key="5" onClick={logout} icon={<BiLogOutCircle />}>
             Logout
           </Menu.Item>
         </Menu>
@@ -129,6 +147,7 @@ const Navbar = (currentId , setCurrentId) => {
                 <input type='text' placeholder='Search posts,users ...'></input>
             </div>
             {/*------------Menu including user----------*/}
+            {user !== null ? (
             <div className='Navbar__right'>
             <div className='Navbar__user_menu'>
                 <div className="Navbar__icon-menu">
@@ -148,10 +167,19 @@ const Navbar = (currentId , setCurrentId) => {
             </div>
             <Dropdown getPopupContainer={() => document.getElementById('Navbar__main')} overlay={menu} trigger={['click']}>
             <div className="Navbar__user-area" >
-
+              <img style={{width:'30px',height:'30px',borderRadius:'10px'}} alt={user.result.name} src={user.result.imageUrl}></img>
             </div>
             </Dropdown>
             </div>
+            ) : (
+            <div className='Navbar__right' style={{justifyContent:'flex-end'}}>
+            <div className='Navbar__user_menu' style={{justifyContent:'flex-end'}}>
+              
+              <Link to='/auth'><button  id="Navbar__user_menu-signin">Sign In</button></Link>
+              <Link to='/auth'><button  id="Navbar__user_menu-signup">Sign Up</button></Link>
+              </div>
+              </div>
+            )}
         </div>
     );
 }
