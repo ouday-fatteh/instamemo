@@ -1,0 +1,25 @@
+.RightMenu__main{
+    position: sticky;
+    margin-right: 35px;
+    top: 65px;
+    width:25%;
+    display: flex;
+    padding: 20px 0px;
+    flex-direction: column;
+    height: 95vh;
+    gap:1.5rem;
+
+}
+
+.RightMenu__requests {
+    background-color: white;
+    border: 1px solid #dbdbdb;
+    height: 30%;
+    border-radius: 4px;
+}
+.RightMenu__contacts {
+    background-color: white;
+    border: 1px solid #dbdbdb;
+    height: 60%;
+    border-radius: 4px;
+}

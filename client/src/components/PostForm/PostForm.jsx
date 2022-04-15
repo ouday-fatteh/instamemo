@@ -105,8 +105,8 @@ import { InboxOutlined } from '@ant-design/icons';
 
      const clear = (e) => {
         const currentImage = postData.selectedFile;
-        const image_id = currentImage.substr(72 + 1);
-        const fetchedImage_id = image_id.substr(0,image_id.length - 4);
+        const image_id = currentImage.substring(72 + 1);
+        const fetchedImage_id = image_id.substring(0,image_id.length - 4);
         if(fetchedImage_id.length){
         dispatch(deleteImage(fetchedImage_id));
         }
@@ -135,7 +135,7 @@ import { InboxOutlined } from '@ant-design/icons';
             dispatch(updatePost(props.currentId,{...postData , name : user?.result?.name}));
             openMessage('Post Updated');
      }else{
-            dispatch(createPost({...postData , creator : user?.result?.name}));
+            dispatch(createPost({...postData , creator : user?.result?.name , creatorImage : user?.result?.imageUrl}));
             openMessage('Post Created');     
      }
      

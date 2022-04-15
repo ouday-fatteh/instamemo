@@ -1,41 +1,66 @@
 import Post from "./Post/Post";
 import Stories from "./Stories/Stories";
 import './Posts.css';
+import { getPosts } from '../../actions/posts';
 import LoadingPosts from '../Posts/LoadingPost/LoadingPost';
-import { useSelector } from 'react-redux';
+import { useSelector , useDispatch} from 'react-redux';
 import PostForm from "../PostForm/PostForm";
 import { useState , useEffect} from 'react';
 
 
 
+
+
+
 const Posts = (props) => {
-    const posts = useSelector((state) => state.posts);
+    const [currentPage,setCurrentPage] = useState(1);
+    const [loading,setLoading] = useState(true);
+    const { posts , isLoading} = useSelector((state) => state.posts);
+    const { totalPosts } = useSelector((state) => state.posts);
+    const [IsDeleting,setIsDeleting] = useState(false);
+    const [hasMore,setHasMore] = useState(true);
+    
     const [isEditing,setIsEditing] = useState(false);
     const [postId,setPostId] = useState(null);
-    const [refresh,setRefresh] = useState(false);
+    const dispatch = useDispatch();
+  
+
+
+    const handleScroll = (event) => {
+     const { scrollTop , clientHeight , scrollHeight } = event.currentTarget;
+      if (scrollHeight - scrollTop === clientHeight){
+        if(totalPosts > posts?.length){
+      setCurrentPage(currentPage + 1);
+      }else{
+        setHasMore(false);
+      }
+      }
+    }
+    
+    
     
     useEffect(() => {
+      props.setCurrentId(postId); 
+    }, [props,postId]);
 
-        props.setCurrentId(postId);
-        props.setIsDeleting(refresh);
-      
-    }, [props,postId,refresh]);
-    
+    useEffect(() => {
+      if (currentPage ) dispatch(getPosts(currentPage));
+    },[currentPage,dispatch]);
+  
     return (
-      !posts.length  ?  (
-      <div className="posts__main">
-          <LoadingPosts />
-      </div>  ): (
-        <>
+      <>
+     
         {isEditing ? (<PostForm  componentNature='post' isEditing={isEditing} setIsEditing={setIsEditing} currentId={props.currentId} setCurrentId={setPostId}/>) : null}
-        <div className="posts__main">
+   
+      
+          <div className="posts__main" onScroll={handleScroll}>  
           
-          {refresh}
-          {posts.map((post,index) => {
+         
+          {posts?.length > 0 && posts.map((post,index) => {
              return <Post 
+             setIsDeleting={setIsDeleting}
+             IsDeleting={IsDeleting}
              setIsEditing={setIsEditing}
-             setIsDeleting={setRefresh}
-             isDeleting = {refresh}
              setCurrentId = {setPostId}
              id = {post._id}
              key={post._id+index} 
@@ -43,18 +68,23 @@ const Posts = (props) => {
              image={post.selectedFile} 
              message={post.message}
              createdAt={post.createdAt}
-             likeCount={post.likeCount}
+             likes={post.likes}
              comments={post.comments}
              creator={post.creator}
+             creatorId={post.creatorId}
+             creatorImage={post.creatorImage}
              shares={post.shareCount}
              tags={post.tags}
              />
-          })}
-
-        </div>
-        </>
-      )
-    )
-}
+            
+              })}
+              {hasMore ? (isLoading && <LoadingPosts />) : <div style={{display:'flex',justifyContent:'center',alignItem:'center',marginTop:'20px'}}>No more posts to show</div>}
+       </div> 
+        
+     
+         
+       
+    </>
+    )}
 
 export default Posts;

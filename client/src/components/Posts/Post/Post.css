@@ -4,7 +4,7 @@
 .post__main{
     margin-top: 20px;
     width:100%;
-    min-height:500px;
+    height:fit-content;
     background-color:rgb(255, 255, 255);
     color:rgb(26, 26, 26);
     border-radius: 4px;
@@ -51,11 +51,11 @@
 .post__image{
     background-color: rgb(255, 255, 255);
     width: 100%;
-    height:400px;
+    
     display:flex;
     justify-content:center;
     align-items:center;
-    object-fit: cover;
+    object-fit: contain;
     
 }
 .post__image-action-bar{

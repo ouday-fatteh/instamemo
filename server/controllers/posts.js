@@ -4,11 +4,26 @@ import PostMessage from "../models/postMessages.js";
 //  Getting posts
 
 export const getPosts = async (req,res) => {
+    const { page } = req.query;
     try {
-        const postMessages = await PostMessage.find();
-        res.status(200).json(postMessages);
+        const LIMIT = 3 * page //10 posts per loading
+        const total = await PostMessage.countDocuments();
+        const posts = await PostMessage.find().sort({_id: -1}).limit(LIMIT);
+        res.status(200).json({data:posts, totalPosts: total});
     } catch (error) {
         res.status(400).json({message:error.message});
+    }
+}
+
+// gettting one post
+
+export const getPost = async (req,res) => {
+    try {
+        const postMessage = await PostMessage.findById(req.params.id);
+        res.status(200).json(postMessage);
+    } catch (error) {
+        res.status(400).json({message:error.message});
+        console.log(error);
     }
 }
 
@@ -16,9 +31,7 @@ export const getPosts = async (req,res) => {
 
 export const createPost = async (req,res) => {
     const post = req.body;
-
     const newPost = new  PostMessage({...post,creatorId : req.userId});
-    console.log(req.body);
     try {
       await newPost.save();
       res.status(201).json(newPost);
@@ -63,20 +76,6 @@ export const createPost = async (req,res) => {
   }
 
   const updatedPost = await PostMessage.findByIdAndUpdate(id, post , { new: true });
-  
-  res.json(updatedPost);
-}
-
-// Unliking posts 
-
-export const unlikePost = async (req, res) => {
-  const { id } = req.params;
-
-  if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
-  
-  const post = await PostMessage.findById(id);
-
-  const updatedPost = await PostMessage.findByIdAndUpdate(id, { likeCount: post.likeCount - 1 }, { new: true });
   
   res.json(updatedPost);
 }

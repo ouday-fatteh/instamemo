@@ -25,6 +25,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Box from '@mui/material/Box';
 import { Link , useHistory , useLocation} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import decode from 'jwt-decode';
 
 
 
@@ -39,6 +40,12 @@ const Navbar = (currentId , setCurrentId) => {
 
    useEffect(() => {
         const token = user?.token;
+        if (token){
+          const decodedToken = decode(token);
+          if (decodedToken.exp < Date.now() / 1000) {
+            logout();
+          }
+        }
         setUser(JSON.parse(localStorage.getItem('profile')));
     },[location])
 
@@ -88,7 +95,9 @@ const Navbar = (currentId , setCurrentId) => {
 
     const logout = () => {
         dispatch({type:'LOGOUT'});
+        setTimeout (() => {
         history.push('/auth');
+        },1000)
         setUser(null);
         message.success('Logged out Successfully');
     }
@@ -167,7 +176,7 @@ const Navbar = (currentId , setCurrentId) => {
             </div>
             <Dropdown getPopupContainer={() => document.getElementById('Navbar__main')} overlay={menu} trigger={['click']}>
             <div className="Navbar__user-area" >
-              {user.result.profileImageUrl !== "" ? (
+              {user.result.imageUrl !== "" ? (
               <img style={{width:'30px',height:'30px',borderRadius:'10px'}} alt={user.result.name} src={user.result.imageUrl}></img>
               ) : (
               <div style={{width:'30px',height:'30px',color:'white',borderRadius:'10px',backgroundColor:'red',display:'flex',justifyContent:'center',alignItems:'center'}}>

@@ -21,6 +21,8 @@ const Auth = () => {
     const [formData , setFormData] = useState(initialState);
     const dispatch = useDispatch();
     const history = useHistory();
+    const user = JSON.parse(localStorage.getItem('profile'));
+    if (user) history.push('/');
 
    const inputprops = {
     endAdornment: (
@@ -42,10 +44,14 @@ const Auth = () => {
        e.preventDefault();
        if(isSignup){
            dispatch(signup(formData,history));
+           
            history.push('/');
+             
        }else{
            dispatch(signin(formData,history));
+          
            history.push('/');
+             
        }
 
    }

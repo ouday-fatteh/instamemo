@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
 
 .skeleton__post__main{
-    margin-top: 10px;
+    margin-top: 20px;
     width:100%;
-    min-height:300px;
+    height:350px;
     background-color:rgb(255, 255, 255);
     color:white;
     border-radius: 4px;
