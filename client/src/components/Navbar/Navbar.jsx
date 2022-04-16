@@ -55,6 +55,12 @@ const Navbar = (currentId , setCurrentId) => {
     }
     setState({ ...state, [anchor]: open });
   };
+
+  const handleMenuClick = (e) => {
+    if (e.key === '1') {
+      history.push('/users/'+(user?.result?._id || user?.result?.googleId));
+    }
+  }
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
@@ -64,7 +70,7 @@ const Navbar = (currentId , setCurrentId) => {
     >
       <List>
         {['Profile', 'Settings', 'Display & accessibility', 'Help & support'].map((text, index) => (
-          <ListItem button key={text}>
+          <ListItem button key={text} >
             <ListItemIcon>
               
             </ListItemIcon>
@@ -107,7 +113,7 @@ const Navbar = (currentId , setCurrentId) => {
 
     const menu = (
         <Menu >
-          <Menu.Item key="1" icon={<UserOutlined />}>
+          <Menu.Item key="1" onClick={handleMenuClick} icon={<UserOutlined />}>
             {user ? user.result.name :''}
           </Menu.Item>
           <Menu.Item key="2" icon={<RiSettings3Line />}>
@@ -149,7 +155,7 @@ const Navbar = (currentId , setCurrentId) => {
             <PostForm componentNature='nav'  handlepostclick={handlepostclick} clicked={togglePostCr}/>
             {/*------------Logo----------*/}
             <div className="Navbar__logo">
-                <h2>Memogram</h2>
+                <h2 onClick={()=> history.push('/')}>Memogram</h2>
             </div>
             {/*------------Search----------*/}
             <div className="Navbar__search">
@@ -179,7 +185,7 @@ const Navbar = (currentId , setCurrentId) => {
               {user.result.imageUrl !== "" ? (
               <img style={{width:'30px',height:'30px',borderRadius:'10px'}} alt={user.result.name} src={user.result.imageUrl}></img>
               ) : (
-              <div style={{width:'30px',height:'30px',color:'white',borderRadius:'10px',backgroundColor:'red',display:'flex',justifyContent:'center',alignItems:'center'}}>
+              <div style={{width:'30px',height:'30px',color:'white',borderRadius:'10px',backgroundColor:'rgb(30, 90, 255)',display:'flex',justifyContent:'center',alignItems:'center'}}>
                   {user.result.name[0].toUpperCase()}
                 </div>)}
             </div>

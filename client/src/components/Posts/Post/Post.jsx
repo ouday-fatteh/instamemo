@@ -10,7 +10,7 @@ import moment from 'moment';
 import { useState , useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Menu, Dropdown , message } from 'antd';
-import { useLocation , Link} from 'react-router-dom';
+import { useLocation , Link , useHistory} from 'react-router-dom';
 
 const key = 'updatable';
 
@@ -40,7 +40,7 @@ const Post = (props)=> {
     const [tags,setTags] = useState([]);
     const location = useLocation();
     const currentUserId = JSON.parse(localStorage.getItem('profile'))?.result._id || JSON.parse(localStorage.getItem('profile'))?.result.googleId;
-
+    const history = useHistory();
 
     useEffect(()=>{
     const lowerArray =  props.tags[0].toLowerCase();
@@ -114,17 +114,17 @@ const Post = (props)=> {
             <div className='post__user-info'>
                 <div className='post__user-wrapper'>
                 {!props.creatorImage ? (
-                            <div className='post__user-image' style={{backgroundColor:'red',justifyContent:'center',alignItems:'center' ,color:'white' ,display:'flex'}}>
+                            <div onClick={()=> history.push(`users/${props.creatorId}`)} className='post__user-image' style={{cursor:'pointer',backgroundColor:'rgb(30, 90, 255)',justifyContent:'center',alignItems:'center' ,color:'white' ,display:'flex'}}>
                             {props?.creator?.charAt(0).toUpperCase()}
                             </div>
                 ) : (
-                  <div className='post__user-image' style={{justifyContent:'center',alignItems:'center',display:'flex'}}>
-                   <img style={{width:'30px' , height:'30px'}} src={props.creatorImage} alt={props.creator} ></img>
+                  <div className='post__user-image' onClick={()=> history.push(`users/${props.creatorId}`)} style={{cursor:'pointer',justifyContent:'center',alignItems:'center',display:'flex'}}>
+                   <img style={{width:'30px' , height:'30px',borderRadius:'8px'}} src={props.creatorImage} alt={props.creator} ></img>
                   </div>
                 )}
           
                     <div className='post__user-name-time'>
-                    <span id='post__user-name'>{props.creator}</span>
+                    <span id='post__user-name' style={{cursor:'pointer'}} onClick={()=> history.push(`/users/${props.creatorId}`)}>{props.creator}</span>
                     <span id='post__user-time'>{moment(props.createdAt).fromNow()}</span>
                     </div>
                 </div>{/**props.setIsEditing(true)**/}

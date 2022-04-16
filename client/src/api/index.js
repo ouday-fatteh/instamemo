@@ -19,3 +19,5 @@ export const fetchPost = (id) => API.get(`/post/${id}`);
 
 export const signin = (formData) => API.post('/user/signin',formData);
 export const signup = (formData) => API.post('/user/signup',formData);
+
+export const getUser = (id) => API.get(`/user/user/${id}`);

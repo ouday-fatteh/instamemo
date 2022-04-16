@@ -36,3 +36,14 @@ export const signup = async (req, res) => {
         res.status(400).send({ message: error.message });
     }
 }
+
+export const getUser = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const user = await User.findById(id);
+        if (!user) return res.status(404).send({ message: 'User not found' });
+        res.status(200).send({ result: user });
+    } catch (error) {
+        res.status(400).send({ message: error.message });
+    }
+}

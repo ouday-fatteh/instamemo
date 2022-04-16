@@ -12,7 +12,7 @@ const LeftMenu = () => {
           {user?.result?.imageUrl ? <img className='LeftMenu__profile__image-img' alt={user?.result?.name} src={user?.result?.imageUrl}></img>:<div className='LeftMenu__profile__image-text'>{user?.result?.name.charAt(0)}</div>}</div>
           <div className='LeftMenu__profile__name-prof'>
         <div className='LeftMenu__profile__name'>{user?.result?.name}</div>
-        <div className='LeftMenu__profile__profession'>Job description</div>
+        <div className='LeftMenu__profile__profession'><span style={{fontSize:'12px',color:'gray'}}>Fullstack Engineer</span></div>
         </div>
         </div>
         

@@ -8,3 +8,6 @@ export const LOGOUT = 'LOGOUT';
 export const FETCH_ONE = 'FETCH_ONE';
 export const START_LOADING = 'START_LOADING';
 export const END_LOADING = 'END_LOADING';
+
+
+export const GET_USER = 'GET_USER';
