@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react';
 import './PostForm.css';
 import { useDispatch , useSelector } from 'react-redux';
 import { createPost , updatePost , deleteImage} from '../../actions/posts';
-import { useStateIfMounted } from 'use-state-if-mounted';
 import { TextField , Button  } from '@material-ui/core';
 import { Upload, message } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
+import { useStateIfMounted } from 'use-state-if-mounted';
 
 
 
  const PostForm = (props) => {
      const [postData,setPostData] = useStateIfMounted({title:'',message:'',tags:'',selectedFile:''});
-     const post = useSelector((state) => props.currentId ? state.posts.find(post => post._id === props.currentId) : null);
+     const post = useSelector((state) => props.currentId ? state.posts.posts.find(post => post._id === props.currentId) : null);
      const dispatch = useDispatch();
      const [isSubmitting,setIsSubmitting] = useState(false);
      const [image,setImage] = useState(null);
@@ -187,7 +187,7 @@ import { InboxOutlined } from '@ant-design/icons';
                        ) }
                         </div>
                         <div className='PostForm__form__buttons'>
-                        <Button type='submit' color='primary' variant="contained" ><div id="muibtn">{props.isEditing ? 'Update' : 'Create'}</div></Button>
+                        <Button type='submit' color='primary' variant="contained" ><div id="muibtn">{props.isEditing ? 'Save changes' : 'Create'}</div></Button>
                         </div>
                     </form>
                 </div>

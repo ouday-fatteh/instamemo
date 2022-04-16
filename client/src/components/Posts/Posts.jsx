@@ -14,12 +14,10 @@ import { useState , useEffect} from 'react';
 
 const Posts = (props) => {
     const [currentPage,setCurrentPage] = useState(1);
-    const [loading,setLoading] = useState(true);
     const { posts , isLoading} = useSelector((state) => state.posts);
     const { totalPosts } = useSelector((state) => state.posts);
     const [IsDeleting,setIsDeleting] = useState(false);
     const [hasMore,setHasMore] = useState(true);
-    
     const [isEditing,setIsEditing] = useState(false);
     const [postId,setPostId] = useState(null);
     const dispatch = useDispatch();
@@ -40,13 +38,12 @@ const Posts = (props) => {
     
     
     useEffect(() => {
-      props.setCurrentId(postId); 
+      props.setCurrentId(postId);
     }, [props,postId]);
 
     useEffect(() => {
       if (currentPage ) dispatch(getPosts(currentPage));
-    },[currentPage,dispatch]);
-  
+    },[currentPage,dispatch,isEditing]);
     return (
       <>
      

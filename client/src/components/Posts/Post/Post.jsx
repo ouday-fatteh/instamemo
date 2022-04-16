@@ -46,8 +46,8 @@ const Post = (props)=> {
     const lowerArray =  props.tags[0].toLowerCase();
     const arraystring = lowerArray.replaceAll(" ","");
     const newtag = arraystring.split(",");
-    const likes = props.likes;
-    const isLiked = likes.includes(currentUserId);
+    const likes = props?.likes;
+    const isLiked = likes?.includes(currentUserId);
     setTimeout(() => {
       setTags(newtag);  
     }, 1000);
@@ -57,7 +57,7 @@ const Post = (props)=> {
       setDidLike(false);
     }
     
-    },[props.tags,props.likes , location]);
+    },[props.tags,props.likes ,currentUserId, location]);
 
 
     const handleLikes = () => {
@@ -86,7 +86,7 @@ const Post = (props)=> {
         openMessage('Please sign in to react to posts',true);
 
     }
-
+   
     const menu = (
       <Menu>
         {currentUserId === props.creatorId ?
@@ -98,13 +98,12 @@ const Post = (props)=> {
            <span onClick={handleDelete}>Delete</span>
         </Menu.Item>
         </>
-        : null}
-        {currentUserId !== props.creatorId ? (
+        : (
           <>
-          <Menu.Item key="3"><span>Hide posts from {props.creator.substring(0,props.creator.indexOf(' '))}</span></Menu.Item>
+          <Menu.Item key="3"><span>Hide posts from {props?.creator?.substring(0,props.creator.indexOf(' '))}</span></Menu.Item>
           <Menu.Item key="4"><span>Report post</span></Menu.Item>
           </>
-        ): null}
+        )}
         
       </Menu>
     
@@ -116,7 +115,7 @@ const Post = (props)=> {
                 <div className='post__user-wrapper'>
                 {!props.creatorImage ? (
                             <div className='post__user-image' style={{backgroundColor:'red',justifyContent:'center',alignItems:'center' ,color:'white' ,display:'flex'}}>
-                            {props.creator.charAt(0).toUpperCase()}
+                            {props?.creator?.charAt(0).toUpperCase()}
                             </div>
                 ) : (
                   <div className='post__user-image' style={{justifyContent:'center',alignItems:'center',display:'flex'}}>
@@ -162,9 +161,9 @@ const Post = (props)=> {
            
             </div>
             <div className='post__likeCount'>
-                <div>{props.likes.length > 1 || props.likes.length === 0 ? `${props.likes.length} Likes` : `${props.likes.length} Like` }</div>
-                <div>{props.comments ? props.comments.length : '0'} Comments</div>
-                <div>{props.shares ? props.shares : 0} Shares</div>
+                <div>{props?.likes?.length > 1 || props?.likes?.length === 0 ? `${props?.likes?.length} Likes` : `${props?.likes?.length} Like` }</div>
+                <div>{props?.comments ? props?.comments?.length : '0'} Comments</div>
+                <div>{props?.shares ? props?.shares : 0} Shares</div>
             </div>
             <div className='post__tags'>
             {tags ? tags.map((tag) => `#${tag} `) : ''}
