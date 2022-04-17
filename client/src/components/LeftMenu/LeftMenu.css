@@ -9,6 +9,9 @@
     flex-direction: column;
     gap:1.5rem;
 }
+@media screen and (max-width:600px){
+    .LeftMenu__main{display:none}
+}
 .LeftMenu__profile {
     display: flex;
     flex-direction: column;

@@ -10,6 +10,9 @@
     gap:1.5rem;
 
 }
+@media screen and (max-width:600px){
+    .RightMenu__main{display:none}
+}
 
 .RightMenu__requests {
     background-color: white;

@@ -4,19 +4,25 @@ import { Button } from '@mui/material'
 import { useDispatch , useSelector} from 'react-redux'
 import { getUser } from '../../actions/users';
 import { useLocation } from 'react-router-dom';
+import TabsProfile from './Tabs';
+
 
 
 const UserProfile = () => {
+    
     const dispatch = useDispatch();
     const location = useLocation(); 
     const userprofile = useSelector(state => state.user) ;  
     const user = JSON.parse(localStorage.getItem('profile')) ;
+
+ 
+
     useEffect(() => {
         const currentUrl = window.location.pathname;
         const currentUserId = currentUrl.replace('/users/','');
         dispatch(getUser(currentUserId));
     }, [location, dispatch]);
-    console.log(userprofile);
+    
 
   return (
     <div className='UserProfile__main'>
@@ -47,7 +53,9 @@ const UserProfile = () => {
                     </div>
                 </div>
             </div>
-            <div className='UserProfile__container__main__bottom'></div>
+            <div className='UserProfile__container__main__bottom'>
+            <TabsProfile connectedUserId = {user?.result?._id || 'none'} profileId={userprofile?.result?._id || 'none'}/>
+            </div>
          </div>
          <div className='UserProfile__container__sidebar'>
          </div>   

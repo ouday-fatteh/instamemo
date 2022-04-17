@@ -1,4 +1,5 @@
 import React from 'react';
+import './Home.css'
 import Posts from "../Posts/Posts";
 import LeftMenu from '../LeftMenu/LeftMenu';
 import RightMenu from '../RightMenu/RightMenu';
@@ -18,7 +19,7 @@ const Home = () => {
   
     
   return (
-    <div  style={{display:'flex',marginTop:'60px',justifyContent:'space-between',width:'100%',height:'90vh'}}>
+    <div className='Home__main'>
     <LeftMenu />
     <Posts  isDeleting={isDeleting} setIsDeleting={setIsDeleting} setCurrentId={setCurrentId} currentId={currentId}/>
     <RightMenu />

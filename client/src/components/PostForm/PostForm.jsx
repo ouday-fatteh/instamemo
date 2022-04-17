@@ -103,13 +103,17 @@ import { useStateIfMounted } from 'use-state-if-mounted';
             }
      },[post]);
 
-     const clear = (e) => {
+     const deleteImageHandler = () => {
         const currentImage = postData.selectedFile;
         const image_id = currentImage.substring(72 + 1);
         const fetchedImage_id = image_id.substring(0,image_id.length - 4);
         if(fetchedImage_id.length){
         dispatch(deleteImage(fetchedImage_id));
         }
+     }
+
+     const clear = (e) => {
+        
             setPostData({
                 title:'',
                 message:'',
@@ -145,6 +149,10 @@ import { useStateIfMounted } from 'use-state-if-mounted';
         animateAndExit();
      } , 2000); 
     }
+    const handleOnExit = () => {
+        animateAndExit();
+        deleteImageHandler();
+    }
     const handlePostData = (e,item) => {
         if(item === 'title')
         setPostData({...postData, title: e.target.value});
@@ -163,7 +171,7 @@ import { useStateIfMounted } from 'use-state-if-mounted';
                 <div className="lds-ripple"><div></div><div></div></div>
             </div>
             ) :null}
-            <div className='PostForm__overlay' onClick={() => {animateAndExit() }} ></div>
+            <div className='PostForm__overlay' onClick={() => {handleOnExit()}} ></div>
             <div className="PostForm__outerBox">
                 <div className='PostForm__Boxheader'>{!props.isEditing ? 'Create a new post' : 'Edit your post'}</div>
                 <div className='PostForm__form'>

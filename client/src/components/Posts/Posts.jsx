@@ -26,7 +26,7 @@ const Posts = (props) => {
 
     const handleScroll = (event) => {
      const { scrollTop , clientHeight , scrollHeight } = event.currentTarget;
-      if (scrollHeight - scrollTop === clientHeight){
+      if ((scrollHeight - scrollTop === clientHeight) - 20){
         if(totalPosts > posts?.length){
       setCurrentPage(currentPage + 1);
       }else{

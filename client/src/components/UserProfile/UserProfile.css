@@ -9,6 +9,7 @@
     gap:2rem;
     margin-top: 60px;
 }
+
 .UserProfile__container__main{
     display: flex;
     overflow-y: overlay;
@@ -47,13 +48,14 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: center;
     width: 100%;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     border-top: 1px solid #dbdbdb;
-    min-height: 700px;
-    padding: 10px;
+    min-height: 180px;
+    padding: 20px;
+    padding-top: 0px;
     gap:2rem;
 }
 .UserProfile__container__main__top-images{
@@ -131,4 +133,33 @@
     width: 25%;
     height: 100%;
     
+}
+.UserProfile__container__main__bottom__tabs{
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-width: 100%;
+}
+.UserProfile__container__main__bottom__tabs-feedback{
+    margin-top: 25px;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+}
+.UserProfile__container__main__bottom__tabs-interests{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-direction: column;
+}
+
+@media screen and (max-width:600px){
+    .UserProfile__container__sidebar{display:none}
+    .UserProfile__container__main{width: 100%;}
+    .UserProfile__main{padding:0 0; margin-top: 49px;}
+    .UserProfile__container__main__top-images__profile-image div{width: 50px;height: 50px;}
+    .UserProfile__container__main__top-images__profile-image {width: 50px;height: 50px;top:-25px;margin-left: 25px;}
 }
