@@ -13,6 +13,8 @@ import { Menu, Dropdown, message } from 'antd';
 import {  UserOutlined } from '@ant-design/icons';
 import { RiSettings3Line } from 'react-icons/ri';
 import { MdOutlineHelpOutline } from 'react-icons/md';
+import { MdNotificationsNone } from 'react-icons/md';
+import { MdOutlineAddBox } from 'react-icons/md';
 import { BsMoon } from 'react-icons/bs';
 import { BiLogOutCircle } from 'react-icons/bi';
 import { AiOutlineMenu } from 'react-icons/ai';
@@ -26,6 +28,7 @@ import Box from '@mui/material/Box';
 import { Link , useHistory , useLocation} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
+import logo from '../../images/logo.png';
 
 
 
@@ -149,13 +152,14 @@ const Navbar = (currentId , setCurrentId) => {
           <div className="Navbar__menu">
           <AiOutlineMenu onClick={toggleDrawer('left', true)}/>
           </div>
+          <div className='Navbar__main-container'>
             <IconContext.Provider  value={{ color: "black",size : 40 ,className: "Navbar__icons"}}>
           <div className='closemodal' style={{display:togglePostCr ? 'white' : 'none'}}><VscChromeClose onClick={() => {togglePostCreation()}}/></div>
           </IconContext.Provider>
             <PostForm componentNature='nav'  handlepostclick={handlepostclick} clicked={togglePostCr}/>
             {/*------------Logo----------*/}
             <div className="Navbar__logo">
-                <h2 onClick={()=> history.push('/')}>Memogram</h2>
+                <img alt='memogram' style={{height:'50px',cursor:'pointer'}} onClick={()=> history.push('/')} src={logo}></img>
             </div>
             {/*------------Search----------*/}
             <div className="Navbar__search">
@@ -168,7 +172,7 @@ const Navbar = (currentId , setCurrentId) => {
                 <div className="Navbar__icon-menu">
                     <IconContext.Provider value={{ color: "white",size : 18 }}>
                         <div className='Navbar__icon-create'onClick={()=> {togglePostCreation()}}>
-                            <HiOutlineCollection />
+                            <MdOutlineAddBox />
                             <div>Create</div>
                         </div>
                     </IconContext.Provider>
@@ -177,6 +181,7 @@ const Navbar = (currentId , setCurrentId) => {
                         <HiOutlineChat />
                         <AiOutlineCompass />
                         <HiOutlineHeart />
+                        <MdNotificationsNone />
                     </IconContext.Provider>
                 </div>
             </div>
@@ -200,6 +205,7 @@ const Navbar = (currentId , setCurrentId) => {
               </div>
               </div>
             )}
+            </div>
         </div>
     );
 }

@@ -6,12 +6,16 @@ import { BrowserRouter , Route, Switch } from "react-router-dom";
 import UserProfile from "./components/UserProfile/UserProfile";
 
 
+
+
+
 const App = () => {
+
     
     return (
         <BrowserRouter>
             <div style={{backgroundColor:"#efefef" ,overflow:'hidden',height:'100%',display:'flex',alignItems:'flex-start',justifyContent:'center'}}>
-                <Navbar/>
+                <Navbar />
                 <Switch>
                     <Route path="/" exact component={Home}/>
                     <Route path="/auth" component={Auth}/>

@@ -22,14 +22,20 @@ const UserProfile = () => {
         const currentUserId = currentUrl.replace('/users/','');
         dispatch(getUser(currentUserId));
     }, [location, dispatch]);
-    
+
 
   return (
     <div className='UserProfile__main'>
         <div className='UserProfile__container__main'>
             <div className='UserProfile__container__main__top'>
                 <div className='UserProfile__container__main__top-images'>
-                    <div className='UserProfile__container__main__top-images__cover-image'>No cover image is set</div>
+                    <div className='UserProfile__container__main__top-images__cover-image'>
+                        <span>No cover image is set</span>
+                        
+                        {userprofile?.result?._id === user?.result?._id && (
+                            <Button size='small' variant='contained' color='primary'>Add cover</Button>
+                        )}
+                    </div>
                     <div className='UserProfile__container__main__top-images__profile-image'>
                         {userprofile?.result?.imageUrl ? <img style={{height:'100px',width:'100px',borderRadius:'8px',objectFit:'contain'}} src={userprofile.result.imageUrl}  alt={userprofile.result.name}/>
                      : <div style={{height:'100px',width:'100px',borderRadius:'8px',display:'flex',justifyContent:'center',alignItems:'center',backgroundColor:'rgb(30, 90, 255)',color:'white',fontSize:'24px'}}>{userprofile?.result?.name.charAt(0)}</div>}

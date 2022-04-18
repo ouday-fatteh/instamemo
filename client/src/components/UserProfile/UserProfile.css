@@ -88,6 +88,8 @@
 }
 .UserProfile__container__main__top-images__cover-image{
     display: flex;
+    flex-direction: column;
+    gap:1rem;
     width: 100%;
     justify-content: center;
     align-items: center;

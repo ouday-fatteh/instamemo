@@ -64,11 +64,16 @@ const Post = (props)=> {
         dispatch(likePost(props.id));
     }
     const handleDelete = () => {
-        const fullUrl = props.image;
-        const image_id = fullUrl.substr(72 + 1);
-        const fetchedImage_id = image_id.substr(0,image_id.length - 4);
+        const fullUrl = props.image || null;
+        let fetchedImage_id =  '';
+        if (fullUrl) {
+        const image_id = fullUrl.substring(72 + 1);
+        fetchedImage_id = image_id.substring(0,image_id.length - 4);
+        }
         dispatch(deletePost(props.id));
+        if (fetchedImage_id) {
         dispatch(deleteImage(fetchedImage_id));
+        }
         props.setCurrentId(0);
         openMessage('Post Deleted');
         setTimeout(() => {
@@ -144,7 +149,7 @@ const Post = (props)=> {
             </div>
 
             <Link to={linktopost} ><div className='post__image' style={{objectFit: 'contain'}}>
-            <img style={{maxWidth:'100%',objectFit:'contain'}} alt={props.title} src={props.image}></img>
+            <img style={{width:'100%',objectFit:'fill'}} alt={props.title} src={props.image}></img>
             </div></Link>
             <IconContext.Provider  value={{ color: "rgb(60, 60, 60)",size : 25 ,className: "Navbar__icons"}}>
             <div className='post__image-action-bar'>
