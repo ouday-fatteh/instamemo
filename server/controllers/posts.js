@@ -91,3 +91,52 @@ export const deletePost = async (req, res) => {
   
   res.json(post);
 }
+
+// Creating comments
+
+export const createComment = async (req,res) => {
+    const { id } = req.params;
+  const { message, creator, creatorId, creatorImage } = req.body;
+  const newComment = { message, creator, creatorId, creatorImage };
+  try {
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+        const updatedPost = await PostMessage.findByIdAndUpdate(id, { $push: { comments: newComment } }, { new: true });
+      res.status(201).json(updatedPost);
+  }
+  catch (error) {
+      res.status(400).json({ message: error.message });
+      console.log(error);
+  }
+}
+
+
+export const updateComment = async (req, res) => {
+  const { id } = req.params;
+  const { message, creator, creatorId, creatorImage } = req.body;
+  const updatedComment = { message, creator, creatorId, creatorImage };
+  try {
+      const post = await PostMessage.findById(id);
+      const index = post.comments.findIndex((comment) => comment._id === id);
+      post.comments[index] = updatedComment;
+      await post.save();
+      res.json(post);
+  }
+  catch (error) {
+      res.status(400).json({ message: error.message });
+  }
+}
+
+
+export const deleteComment = async (req, res) => {
+  const { id } = req.params;
+  try {
+      const post = await PostMessage.findById(id);
+      const index = post.comments.findIndex((comment) => comment._id === id);
+      post.comments.splice(index, 1);
+      await post.save();
+      res.json(post);
+  }
+  catch (error) {
+      res.status(400).json({ message: error.message });
+  }
+}

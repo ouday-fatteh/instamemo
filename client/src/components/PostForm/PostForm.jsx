@@ -11,10 +11,13 @@ import { useStateIfMounted } from 'use-state-if-mounted';
 
  const PostForm = (props) => {
      const [postData,setPostData] = useStateIfMounted({title:'',message:'',tags:'',selectedFile:''});
+     const [postDataTemp,setPostDataTemp] = useStateIfMounted({title:'',message:'',tags:'',selectedFile:''});
      const post = useSelector((state) => props.currentId ? state.posts.posts.find(post => post._id === props.currentId) : null);
      const dispatch = useDispatch();
      const [isSubmitting,setIsSubmitting] = useState(false);
      const [image,setImage] = useState(null);
+     const [uploaded,setUploaded] = useState(false);
+     const [changed,setChanged] = useState(false);
      const { Dragger } = Upload;
      const user = JSON.parse(localStorage.getItem('profile'));
      const url = 'https://api.cloudinary.com/v1_1/instamemo/image/upload/';
@@ -45,6 +48,7 @@ import { useStateIfMounted } from 'use-state-if-mounted';
             
             setPostData({...postData,selectedFile:data.url});
             onSuccess(data.statusText);
+            setUploaded(true);
             
         })
         .catch(err => {
@@ -100,6 +104,12 @@ import { useStateIfMounted } from 'use-state-if-mounted';
                     tags:post.tags,
                     selectedFile:post.selectedFile
                 });
+                setPostDataTemp ({
+                    title:post.title,
+                    message:post.message,
+                    tags:post.tags,
+                    selectedFile:post.selectedFile
+                });
             }
      },[post]);
 
@@ -120,6 +130,7 @@ import { useStateIfMounted } from 'use-state-if-mounted';
                 tags:'',
                 selectedFile:''
             }); 
+            setUploaded(false);
      }
 
 
@@ -159,8 +170,22 @@ import { useStateIfMounted } from 'use-state-if-mounted';
         else if(item === 'message')
         setPostData({...postData, message: e.target.value});
         else if(item === 'tags')
-        setPostData({...postData, tags: e.target.value})
-    }
+        setPostData({...postData, tags: e.target.value})       
+ }
+    useEffect(() => {
+    if (props.isEditing){
+        
+        let newTags;
+       if (Array.isArray(postData.tags)) {newTags =  postData.tags[0]} else {newTags = postData.tags}
+      if (postDataTemp?.title === postData.title && postDataTemp?.message === postData.message && postDataTemp?.tags[0] === newTags){
+                  setChanged(false);
+        }
+      else if(postDataTemp?.title !== postData.title || postDataTemp?.message !== postData.message || postDataTemp?.tags[0] !== newTags) {
+                  setChanged(true);
+        } 
+   }
+},[postData]);
+
     
 
     return (
@@ -176,9 +201,9 @@ import { useStateIfMounted } from 'use-state-if-mounted';
                 <div className='PostForm__Boxheader'>{!props.isEditing ? 'Create a new post' : 'Edit your post'}</div>
                 <div className='PostForm__form'>
                     <form className='PostForm__form__form' onSubmit={(e) => handleSubmit(e)}>
-                        <TextField required variant='outlined' value = {postData.title} label='Title' onChange={(e) => handlePostData(e,'title')} />
-                        <TextField required variant='outlined'  multiline minRows={2} maxRows={4} value = {postData.message} label='Type here your message' onChange={(e) => handlePostData(e,'message')}/>
-                        <TextField variant='outlined' value={postData.tags} label='Tags (use comma to seperate)' onChange={(e) => handlePostData(e,'tags')}/>
+                        <TextField id='PostForm__form--title' required variant='outlined' value = {postData.title} label='Title' onChange={(e) => handlePostData(e,'title')} />
+                        <TextField id='PostForm__form--message' required variant='outlined'  multiline minRows={2} maxRows={4} value = {postData.message} label='Type here your message' onChange={(e) => handlePostData(e,'message')}/>
+                        <TextField id='PostForm__form--tags' variant='outlined' value={postData.tags} label='Tags (use comma to seperate)' onChange={(e) => handlePostData(e,'tags')}/>
                         <div style={{display:'block',maxWidth:'100%',alignItems:'center',justifyContent:'center',marginTop:'25px'}}>
                        {props.componentNature === 'nav' && (
                        <Dragger  {...fprops}>
@@ -195,7 +220,7 @@ import { useStateIfMounted } from 'use-state-if-mounted';
                        ) }
                         </div>
                         <div className='PostForm__form__buttons'>
-                        <Button type='submit' color='primary' variant="contained" ><div id="muibtn">{props.isEditing ? 'Save changes' : 'Create'}</div></Button>
+                        <Button type='submit' disabled={uploaded === true || changed === true ? false : true } color='primary' variant="contained" ><div id="muibtn">{props.isEditing ? 'Save changes' : 'Create'}</div></Button>
                         </div>
                     </form>
                 </div>

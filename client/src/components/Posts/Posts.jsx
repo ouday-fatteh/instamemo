@@ -72,6 +72,7 @@ const Posts = (props) => {
              creatorImage={post.creatorImage}
              shares={post.shareCount}
              tags={post.tags}
+             isLoading={isLoading}
              />
             
               })}

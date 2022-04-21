@@ -88,15 +88,48 @@
     word-wrap: break-word;
     color: rgb(50, 50, 50);
 }
+.post_comments{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
 .post__comment-main {
     width: 99.9%;
     height: 50px;
     margin-bottom: 0px;
-    margin-top: 5px;
     display: flex;
     align-items: center;
     gap:0.5rem;
     
+    
+}
+.post_comments-main{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 0.5rem;
+}
+.post_comments-user{
+    display: flex;
+    align-items: flex-start;
+    gap:0.5rem;
+    font-size: 11px;
+}
+.post_comments-user-image{
+    width: 20px;
+    height: 20px;
+    border-radius: 8px;
+    background-color: #dbdbdb;
+}
+.post_comments-comment{
+    padding: 5px 10px;
+    background-color: #dbdbdb;
+    max-width: 100%;
+    border-radius: 4px;
 }
 .comment-input {
     width:85%;

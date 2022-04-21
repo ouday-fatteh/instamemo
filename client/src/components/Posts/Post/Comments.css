@@ -1,0 +1,12 @@
+.comment__user-image {
+    cursor: pointer;
+    background-color: rgb(30, 90, 255);
+    justify-content: center;
+    align-items: center;
+    color: white;
+    display: flex;
+    width:25px;
+    height: 25px;
+    border-radius: 8px;
+    padding:0px;
+}

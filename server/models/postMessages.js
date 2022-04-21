@@ -1,5 +1,28 @@
 import mongoose from "mongoose";
 
+const commentsSchema = new mongoose.Schema({
+    message: {
+        type: String,
+        required: true,
+    },
+    creator: {
+        type: String,
+        required: true,
+    },
+    creatorId: {
+        type: String,
+        required: true,
+    },
+    creatorImage: {
+        type: String,
+        required: true,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+});
+
 
 const postSchema = mongoose.Schema({
     title : String,
@@ -13,7 +36,7 @@ const postSchema = mongoose.Schema({
         type : [String],
         default : []
     },
-    comments: [String],
+    comments: [commentsSchema],
     shareCount: {
         type: Number,
         default : 0

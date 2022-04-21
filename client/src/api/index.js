@@ -13,6 +13,7 @@ export const fetchPosts = (page) => API.get(`/posts?page=${page}`);
 export const createPosts = (newPost) => API.post('/posts',newPost);
 export const updatePosts = (id,updatedPost) => API.patch(`/posts/${id}`,updatedPost);
 export const likePosts = (id) => API.patch(`/posts/${id}/like`);
+export const createComment = (id,comment) => API.patch(`/posts/${id}/comment`,comment);
 export const deletePosts = (id) => API.delete(`/posts/${id}`);
 export const deleteImage = (id) => API.delete(`/posts/image/${id}`);
 export const fetchPost = (id) => API.get(`/post/${id}`);
@@ -21,3 +22,4 @@ export const signin = (formData) => API.post('/user/signin',formData);
 export const signup = (formData) => API.post('/user/signup',formData);
 
 export const getUser = (id) => API.get(`/user/user/${id}`);
+

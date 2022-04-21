@@ -9,10 +9,14 @@ import { likePost  , deletePost , deleteImage} from '../../../actions/posts';
 import moment from 'moment';
 import { useState , useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Menu, Dropdown , message } from 'antd';
+import { Menu, Dropdown , message ,Collapse , Spin } from 'antd';
 import { useLocation , Link , useHistory} from 'react-router-dom';
+import CommentSection from './Comments';
+import { createComment } from '../../../actions/posts';
+
 
 const key = 'updatable';
+const { Panel } = Collapse;
 
 
 
@@ -40,7 +44,10 @@ const Post = (props)=> {
     const [tags,setTags] = useState([]);
     const location = useLocation();
     const currentUserId = JSON.parse(localStorage.getItem('profile'))?.result._id || JSON.parse(localStorage.getItem('profile'))?.result.googleId;
+    const currentUser = JSON.parse(localStorage.getItem('profile'))?.result;
     const history = useHistory();
+    const [comment,setComment] = useState('Show');
+    const [commentValue,setCommentValue] = useState({message:''});
 
     useEffect(()=>{
     const lowerArray =  props.tags[0].toLowerCase();
@@ -59,6 +66,10 @@ const Post = (props)=> {
     
     },[props.tags,props.likes ,currentUserId, location]);
 
+
+    const handleCommentsChange = (e) => {
+      setCommentValue({...commentValue,message:e.target.value});
+    }
 
     const handleLikes = () => {
         dispatch(likePost(props.id));
@@ -91,6 +102,9 @@ const Post = (props)=> {
         openMessage('Please sign in to react to posts',true);
 
     }
+    const handleCommentShow = () => {
+      if(comment === 'Show') {setComment('Hide')} else {setComment('Show')}
+    }
    
     const menu = (
       <Menu>
@@ -113,6 +127,19 @@ const Post = (props)=> {
       </Menu>
     
     );
+
+    const handleCommentCreate = () => {
+      if (commentValue.message) {
+        dispatch(createComment(props.id,{...commentValue , creatorId:currentUserId , creator:currentUser?.name,creatorImage: currentUser.imageUrl }));
+        setCommentValue({message:''});
+      }
+
+    }
+    const handleKeypress = e => {
+    if (e.keyCode === 13) {
+      handleCommentCreate();
+    }
+  };
     const linktopost = `/post/${props.id}`;
     return (
         <div className="post__main">
@@ -179,13 +206,39 @@ const Post = (props)=> {
             <div className="post__message">
             {props.message}
             </div>
-
-            <div className="post__comment-main">
-            <VscSmiley style={{marginLeft:'10px'}}/>
-            <input type='text' className="comment-input" placeholder='Add a comment'></input>
-            <BiMessageSquareAdd style={{marginRight:'10px'}}/>
-
+            {props.comments?.length > 0 && (
+            <div className='post_comments' >
+              <Collapse ghost defaultActiveKey={0}  style={{display:'flex',width:'100%',fontSize:'13px',justifyContent:'center'}} onChange={() => handleCommentShow}>
+              <Panel key={1} header={`${comment} comments`} style={{width:'100%'}}  >
+                
+                {props?.comments?.map((comment,index) => (
+              <CommentSection 
+              key={comment._id+index}
+              creator={comment.creator}
+              creatorId={comment.creatorId}
+              createdAt={comment.createdAt}
+              creatorImage={comment.creatorImage}
+              message={comment.message}
+               />
+                ))}
+              </Panel>
+              </Collapse>
             </div>
+            )
+            }
+            
+           
+             <Spin spinning={props?.isLoading} delay={500}>
+               <div className="post__comment-main">
+            <VscSmiley style={{marginLeft:'10px'}}/>
+            
+            <input type='text' onKeyDown={(e) => handleKeypress(e)} value={commentValue.message} onChange={(e) => handleCommentsChange(e)} className="comment-input" placeholder='Add a comment'></input>
+            
+            <BiMessageSquareAdd onClick={() => handleCommentCreate() } style={{marginRight:'10px'}}/>
+            </div>
+            </Spin>
+            
+            
             </IconContext.Provider>
         </div>
     )

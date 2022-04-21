@@ -70,3 +70,15 @@ export const updatePost = (id, post) => async (dispatch) => {
             console.log(error.message);
         }
     }
+
+    export const createComment = (id, comment) => async (dispatch) => {
+        try {
+            dispatch({ type: 'START_LOADING' });
+            const { data } = await api.createComment(id, comment);
+            dispatch({ type: 'CREATE_COMMENT', payload: data });
+            dispatch({ type: 'END_LOADING' });
+        }
+        catch (error) {
+            console.log(error.message);
+        }
+    }
