@@ -18,6 +18,34 @@ const userSchema = new mongoose.Schema({
         type: String,
         default:''
     },
+    birthDate: {
+        type: Date,
+        required: true
+    },
+    coverImage: {
+        type: String,
+        default:''
+    },
+    bio: {
+        type: String,
+        default:''
+    },
+    interests: {
+        type: [String],
+        default:''
+    },
+    following: {
+        type: [String],
+        default:''
+    },
+    followers: {
+        type: [String],
+        default:''
+    },
+    isVerified: {
+        type: Boolean,
+        default: false
+    },
     Registerdate: {
         type: Date,
         default: Date.now

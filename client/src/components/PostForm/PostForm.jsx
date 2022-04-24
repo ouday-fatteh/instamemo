@@ -150,7 +150,7 @@ import { useStateIfMounted } from 'use-state-if-mounted';
             dispatch(updatePost(props.currentId,{...postData , name : user?.result?.name}));
             openMessage('Post Updated');
      }else{
-            dispatch(createPost({...postData , creator : user?.result?.name , creatorImage : user?.result?.imageUrl}));
+            dispatch(createPost({...postData , creator : user?.result?.name , creatorImage : user?.result?.imageUrl ,creatorIsVerified : user?.result?.isVerified }));
             openMessage('Post Created');     
      }
      

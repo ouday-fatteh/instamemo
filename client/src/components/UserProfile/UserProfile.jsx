@@ -5,6 +5,8 @@ import { useDispatch , useSelector} from 'react-redux'
 import { getUser } from '../../actions/users';
 import { useLocation } from 'react-router-dom';
 import TabsProfile from './Tabs';
+import { MdVerified } from 'react-icons/md';
+import { IconContext } from "react-icons";
 
 
 
@@ -45,7 +47,7 @@ const UserProfile = () => {
                     <div className='UserProfile__container__main__top-info__spacer'></div>
                     <div className='UserProfile__container__main__top-info__info'>
                         <div className='UserProfile__container__main__top-info__info__details'>
-                            <span style={{fontSize:'16px'}}><b>{userprofile?.result?.name}</b></span>
+                            <div style={{fontSize:'16px',display:'flex',justifyContent:'center',alignItems:'center'}}><b>{userprofile?.result?.name}</b>&nbsp;&nbsp;<span style={{alignItems:'center'}}>{userprofile?.result?.isVerified && <IconContext.Provider  value={{ color: "rgb(30, 90, 255)",size : 20 ,className:'UserProfile__icon'}}><MdVerified /></IconContext.Provider>}</span></div>
                             <span style={{fontSize:'12px'}}>Fullstack Engineer at Google</span>
                             <span style={{fontSize:'12px'}}>Lives in New York</span>
                         </div>

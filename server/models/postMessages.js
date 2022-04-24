@@ -29,6 +29,7 @@ const postSchema = mongoose.Schema({
     message : String , 
     creator : String,
     creatorId : String,
+    creatorIsVerified : {type:Boolean, default: false},
     creatorImage : String,
     tags : [String],
     selectedFile : String,

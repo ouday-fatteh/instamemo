@@ -157,6 +157,12 @@
     gap: 1rem;
     flex-direction: column;
 }
+.UserProfile__icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
 
 @media screen and (max-width:600px){
     .UserProfile__container__sidebar{display:none}

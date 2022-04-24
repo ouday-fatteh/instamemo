@@ -13,6 +13,7 @@ import { Menu, Dropdown , message ,Collapse , Spin } from 'antd';
 import { useLocation , Link , useHistory} from 'react-router-dom';
 import CommentSection from './Comments';
 import { createComment } from '../../../actions/posts';
+import { MdVerified } from 'react-icons/md';
 
 
 const key = 'updatable';
@@ -156,7 +157,7 @@ const Post = (props)=> {
                 )}
           
                     <div className='post__user-name-time'>
-                    <span id='post__user-name' style={{cursor:'pointer'}} onClick={()=> history.push(`/users/${props.creatorId}`)}>{props.creator}</span>
+                    <span id='post__user-name' style={{cursor:'pointer'}} onClick={()=> history.push(`/users/${props.creatorId}`)}>{props.creator}&nbsp;&nbsp;{props.creatorIsVerified && <IconContext.Provider  value={{ color: "rgb(30, 90, 255)",size : 15 }}><MdVerified /></IconContext.Provider>}</span>
                     <span id='post__user-time'>{moment(props.createdAt).fromNow()}</span>
                     </div>
                 </div>{/**props.setIsEditing(true)**/}

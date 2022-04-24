@@ -69,6 +69,7 @@ const Posts = (props) => {
              comments={post.comments}
              creator={post.creator}
              creatorId={post.creatorId}
+             creatorIsVerified={post.creatorIsVerified}
              creatorImage={post.creatorImage}
              shares={post.shareCount}
              tags={post.tags}
