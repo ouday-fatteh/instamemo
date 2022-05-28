@@ -1,0 +1,79 @@
+.messenger__main {
+    width: 100%;
+    height: calc(100vh - 60px);
+    margin-top: 60px;
+    padding:20px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.messenger__conversations {
+
+    padding:10px 10px;
+    width: 25%;
+    height: 100%;
+
+}
+.messenger__active-conversation {
+
+    padding:10px 10px;
+    width: 50%;
+    height: 100%;
+  
+}
+.messenger__online-contacts {
+    padding:10px 10px;
+    width: 25%;
+    height: 100%;
+   
+}
+.messenger__conversations-container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    padding: 15px 15px;
+    background-color: white;
+    height: 100%;
+    gap:1rem;
+}
+.messenger__active-container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    background-color: white;
+    height: 100%;
+}
+.messenger__online-container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    background-color: white;
+    height:fit-content;
+    padding: 1rem 15px;
+    gap:1rem;
+}
+.messenger__conversations-input-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.messenger__conversations-list-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0px;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-top: 1px solid #dbdbdb;
+}
+.messenger__conversations-search-input {
+        width: 100%;
+        height: 30px;
+        border: 1px solid #dbdbdb;
+        border-radius: 20px;
+        padding:0px 10px;
+        outline: none;
+}

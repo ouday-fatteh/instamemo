@@ -118,7 +118,7 @@ import { useStateIfMounted } from 'use-state-if-mounted';
         const image_id = currentImage.substring(72 + 1);
         const fetchedImage_id = image_id.substring(0,image_id.length - 4);
         if(fetchedImage_id.length){
-        dispatch(deleteImage(fetchedImage_id));
+        dispatch(deleteImage(fetchedImage_id,'post'));
         }
      }
 

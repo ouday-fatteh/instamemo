@@ -15,11 +15,15 @@ export const updatePosts = (id,updatedPost) => API.patch(`/posts/${id}`,updatedP
 export const likePosts = (id) => API.patch(`/posts/${id}/like`);
 export const createComment = (id,comment) => API.patch(`/posts/${id}/comment`,comment);
 export const deletePosts = (id) => API.delete(`/posts/${id}`);
-export const deleteImage = (id) => API.delete(`/posts/image/${id}`);
+export const deleteImage = (id,type) => API.delete(`/posts/image/${id}?type=${type}`);
 export const fetchPost = (id) => API.get(`/post/${id}`);
+
 
 export const signin = (formData) => API.post('/user/signin',formData);
 export const signup = (formData) => API.post('/user/signup',formData);
+export const finishingSignUp = (formData,user_id) => API.patch(`/user/finishingsignup/${user_id}`,formData);
+export const followUser = (id,followerId) => API.post(`/user/follow/${id}?followerId=${followerId}`);
+export const unfollowUser = (id,unfollowerId) => API.delete(`/user/unfollow/${id}?unfollowerId=${unfollowerId}`);
 
 export const getUser = (id) => API.get(`/user/user/${id}`);
 

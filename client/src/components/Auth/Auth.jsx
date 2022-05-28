@@ -11,6 +11,7 @@ import Icon from './Icon';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { signin, signup } from '../../actions/auth';
+import axios from 'axios';
 
 
 const initialState = { firstName:'',lastName:'',email:'',password:'',confirmPassword:'' };
@@ -19,10 +20,22 @@ const Auth = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isSignup , setIsSignup ]= useState(false);
     const [formData , setFormData] = useState(initialState);
+    const [currentCountry,setCurrentCountry] = useState('');
+    const [currentCountryCode,setCurrentCountryCode] = useState('');
     const dispatch = useDispatch();
     const history = useHistory();
     const user = JSON.parse(localStorage.getItem('profile'));
+    const GeoAPIKey = "2dYVW9ItD780RTcI3c3yj3nesYThw7h2";
     if (user) history.push('/');
+
+    const getGeoInfo = () => {
+        const res = axios.get(`https://api.ip2loc.com/${GeoAPIKey}/detect`,{ 'mode': 'no-cors' });
+        res.then(response => {
+          setCurrentCountry(response.data.location.country.name);
+          setCurrentCountryCode(response.data.location.country.dialing_code[0]);
+        })
+      };
+      getGeoInfo();
 
    const inputprops = {
     endAdornment: (
@@ -42,16 +55,14 @@ const Auth = () => {
 
    const handleSubmit = (e) => {
        e.preventDefault();
+       const geoLocation = {
+            country: currentCountry,
+            countryCode: currentCountryCode
+         }
        if(isSignup){
-           dispatch(signup(formData,history));
-           
-           history.push('/');
-             
+           dispatch(signup(formData,history,geoLocation));
        }else{
            dispatch(signin(formData,history));
-          
-           history.push('/');
-             
        }
 
    }

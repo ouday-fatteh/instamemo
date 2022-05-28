@@ -6,6 +6,21 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    nickname : {
+        type: String
+    },
+    country : {
+        type: String
+    },
+    phone : {
+        type: String
+    },
+    bio : {
+        type : String
+    },
+    gender: {
+        type : String
+    },
     email: {
         type: String,
         required: true
@@ -20,7 +35,6 @@ const userSchema = new mongoose.Schema({
     },
     birthDate: {
         type: Date,
-        required: true
     },
     coverImage: {
         type: String,
@@ -41,6 +55,10 @@ const userSchema = new mongoose.Schema({
     followers: {
         type: [String],
         default:''
+    },
+    hasFinishedSignUp : {
+        type: Boolean,
+        default: false
     },
     isVerified: {
         type: Boolean,

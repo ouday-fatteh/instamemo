@@ -11,12 +11,16 @@ cloudinary.config({
 
   export const deleteImage = async (req, res) => {
     const { id } = req.params;
-    const  public_id  = 'post_images/'.concat(id) ;
+    const { type } = req.query;
+    let url;
+    if (type === 'profile') {url = `profile_images/${id}`}
+    if (type === 'cover') {url = `cover_images/${id}`}
+    if (type === 'post') {url = `post_images/${id}`}
     const options = {
         resource_type:'image',
         invalidate: true
     };
     
-    cloudinary.v2.uploader.destroy( `post_images/${id}`,options,
+    cloudinary.v2.uploader.destroy( url,options,
       (error, result) => {console.log(result, error)});
   }

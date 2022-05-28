@@ -1,0 +1,65 @@
+.RequestChip__main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: white;
+    border-radius: 8px; 
+    padding:10px 20px;
+    gap: 1rem;
+}
+.RequestChip__user{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+.RequestChip__user-image {
+    height: 35px;
+    width:35px;
+    border-radius: 8px;
+    background-color: #dbdbdb;
+
+}
+.RequestChip__user-name {
+    width: calc(100% - 35px);
+    gap:0.25rem;
+    border-radius: 8px;
+    text-align: left;
+    font-size: 12px;
+}
+.RequestChip__buttons{
+    display: flex;
+    gap: 0.5rem;
+    justify-content:space-between;
+    align-items: center;
+}
+.RequestChip__buttons-both{
+    height: 30px;
+    width: 100px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #dbdbdb;
+    cursor: pointer;
+}
+#RequestChip_buttons-first{
+    background-color: rgb(30, 90, 255);
+    color:white;
+    transition:0.2s;
+}
+#RequestChip_buttons-second{
+    color: #757575;
+    transition:0.2s;
+}
+#RequestChip_buttons-first:hover{
+    background-color: rgb(21, 64, 182);
+    color: white;
+}
+#RequestChip_buttons-second:hover{
+    background-color: rgb(255, 75, 75);
+    color: white;
+}
+

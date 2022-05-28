@@ -1,0 +1,87 @@
+.contact__main {
+    display: flex;
+    position: relative;
+    height: 35px;
+    width: 100%;
+    font-size:12px ;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: 0.2s ;
+    border-radius:8px ;
+    padding: 0px 10px;
+}
+.contact__profile_image {
+    width: 25px;
+    height: 25px;
+    border-radius: 8px;
+    background-color: #ebebeb;
+}
+.contact__main:hover {
+    background-color: #dbdbdb;
+}
+.contact__main:hover .contact__send_message{
+    display: flex;
+    opacity: 1;
+}
+.contact__name {
+    text-align: center;
+}
+.contact__online_status {
+    position:absolute;
+    left: 30px;
+    bottom: 5px;
+    width:6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: lime;
+}
+.contact__send_message {
+    display: none;
+    align-items: center;
+    justify-content: flex-end;
+    width: 20%;;
+    opacity: 0;
+    transition: 0.2s;
+}
+.contact__send_message_btn:hover {
+    background-color: rgb(27, 12, 245);
+    color: white;
+}
+.contact__send_message_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    font-size: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+@keyframes wiggle {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(30deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+    
+.contact__send_message_btn:hover {
+    animation: wiggle 0.5s ease-in-out infinite;
+}
+.contact {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: 35px;
+    width: 70%;
+    gap: 1rem;
+    border-radius: 8px;
+}

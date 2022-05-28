@@ -1,11 +1,7 @@
 import './Navbar.css';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { HiOutlineHome } from 'react-icons/hi';
-import { HiOutlineChat } from 'react-icons/hi';
-import { HiOutlineCollection } from 'react-icons/hi';
-import { AiOutlineCompass } from 'react-icons/ai';
-import { HiOutlineHeart } from 'react-icons/hi';
+
 import { IconContext } from "react-icons";
 import PostForm from '../PostForm/PostForm'; 
 import { VscChromeClose } from 'react-icons/vsc';
@@ -13,7 +9,7 @@ import { Menu, Dropdown, message } from 'antd';
 import {  UserOutlined } from '@ant-design/icons';
 import { RiSettings3Line } from 'react-icons/ri';
 import { MdOutlineHelpOutline } from 'react-icons/md';
-import { MdNotificationsNone } from 'react-icons/md';
+
 import { MdOutlineAddBox } from 'react-icons/md';
 import { BsMoon } from 'react-icons/bs';
 import { BiLogOutCircle } from 'react-icons/bi';
@@ -172,17 +168,11 @@ const Navbar = (currentId , setCurrentId) => {
                 <div className="Navbar__icon-menu">
                     <IconContext.Provider value={{ color: "white",size : 18 }}>
                         <div className='Navbar__icon-create'onClick={()=> {togglePostCreation()}}>
-                            <MdOutlineAddBox />
+                            <span style={{display:'flex',alignItems:'center',justifyContent:'center'}}><MdOutlineAddBox /></span>
                             <div>Create</div>
                         </div>
                     </IconContext.Provider>
-                    <IconContext.Provider value={{ color: "rgb(60, 60, 60)",size : 25 ,className: "Navbar__icons"}}>
-                        <HiOutlineHome />
-                        <HiOutlineChat />
-                        <AiOutlineCompass />
-                        <HiOutlineHeart />
-                        <MdNotificationsNone />
-                    </IconContext.Provider>
+                    
                 </div>
             </div>
             <Dropdown getPopupContainer={() => document.getElementById('Navbar__main')} overlay={menu} trigger={['click']}>

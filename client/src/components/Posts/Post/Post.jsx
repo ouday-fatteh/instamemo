@@ -84,7 +84,7 @@ const Post = (props)=> {
         }
         dispatch(deletePost(props.id));
         if (fetchedImage_id) {
-        dispatch(deleteImage(fetchedImage_id));
+        dispatch(deleteImage(fetchedImage_id,'post'));
         }
         props.setCurrentId(0);
         openMessage('Post Deleted');

@@ -17,22 +17,31 @@
     flex-direction: column;
     gap:0.5em;
     background-color: white;
-    border: 1px solid #dbdbdb;
     height: 15%;
-    border-radius: 4px;
+    border-radius: 8px;
     padding:10px 10px;
 }
 .LeftMenu__menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: white;
-    border: 1px solid #dbdbdb;
     height: 40%;
-    border-radius: 4px;
+    border-radius: 8px;
 }
+
 .LeftMenu__invitations {
+    position: relative;
     background-color: white;
-    border: 1px solid #dbdbdb;
     height: 30%;
-    border-radius: 4px;
+    border-radius: 8px;
+    transition:0.2s;
+    overflow: hidden;
+}
+.LeftMenu__invitations:hover .LeftMenu__ad_overlay{
+    opacity:1;
+    transform: translate(0%, -100%);
 }
 .LeftMenu__profile__info{
     display: flex;
@@ -87,4 +96,56 @@
     height: 30px;
     border-radius: 4px;
   
+}
+.LeftMenu__ad_background{
+    width: 100%;
+    height: 100%;
+}
+.LeftMenu__ad_overlay {
+    display: flex;
+    opacity:0.8;
+    flex-direction: column;
+    color:white;
+    gap:0.25rem;
+    padding:15px 15px;
+    padding-top: 50px;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 30%, rgba(0,0,0,1) 100%);
+    transform: translate(0%, -60%);
+    transition: 0.5s;
+}
+#image__ad_holder{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.LeftMenu__ad_overlay_buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.LeftMenu__ad_overlay_button-1{
+    color:white;
+    background-color:rgb(30, 90, 255);
+    border:none;
+    height: 30px;
+    width:45%;
+    border-radius:20px;
+    outline: none;
+    padding:0px 10px;
+    cursor: pointer;
+}
+.LeftMenu__ad_overlay_button-2{
+    color:white;
+    background-color:rgb(146, 146, 146);
+    border:none;
+    height: 30px;
+    width:45%;
+    border-radius:20px;
+    outline: none;
+    padding:0px 10px;
+    cursor: pointer;
 }
