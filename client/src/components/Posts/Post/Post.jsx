@@ -51,14 +51,14 @@ const Post = (props)=> {
     const [commentValue,setCommentValue] = useState({message:''});
 
     useEffect(()=>{
-    const lowerArray =  props.tags[0].toLowerCase();
+    const lowerArray =  props?.tags[0].toLowerCase();
     const arraystring = lowerArray.replaceAll(" ","");
     const newtag = arraystring.split(",");
     const likes = props?.likes;
     const isLiked = likes?.includes(currentUserId);
-    setTimeout(() => {
-      setTags(newtag);  
-    }, 1000);
+    
+    setTags(newtag);  
+   
     if (isLiked) {
       setDidLike(true);
     }else{

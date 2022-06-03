@@ -4,6 +4,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import postRoutes from './routes/posts.js';
 import userRoutes from './routes/user.js';
+import chatRoutes from './routes/chat.js';
 import dotenv from 'dotenv';
 
 
@@ -23,7 +24,8 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json({limit:"30mb",extended:true}));
 app.use(bodyParser.urlencoded({limit:"30mb",extended:true}));
 app.use('/api',postRoutes);
-app.use('/api/user',userRoutes)
+app.use('/api/user',userRoutes);
+app.use('/api/chat',chatRoutes);
 
 mongoose.connect(CONNECTION_URL, { useNewUrlParser:true , useUnifiedTopology:true })
 .then(() => app.listen(PORT , () => console.log(`Server up and running on ${PORT}`)))

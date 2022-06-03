@@ -66,10 +66,11 @@ export const followUser = async (req, res) => {
     const { id } = req.params;
     const { followerId } = req.query;
     try {
-        console.log(followerId);
+        
         const user = await User.findById(id);
         const user2 = await User.findById(followerId);
         if (!user || !user2 ) return res.status(404).send({ message: 'User not found' });
+        if(user.followers.includes(followerId)) return res.status(400).send({ message: 'User already followed' });
         user.followers.push(followerId);
         user2.following.push(id);
         await user.save();
@@ -85,13 +86,26 @@ export const unfollowUser = async (req, res) => {
     const { unfollowerId } = req.query;
     try {
         const user = await User.findById(id);
-        const user2 = await User.findById(followerId);
+        const user2 = await User.findById(unfollowerId);
         if (!user || !user2 ) return res.status(404).send({ message: 'User not found' });
+        if(!user.followers.includes(unfollowerId)) return res.status(400).send({ message: 'User not followed' });
         user.followers.pull(unfollowerId);
         user2.following.pull(id);
         await user.save();
         await user2.save();
         res.status(200).send({ result: user });
+    } catch (error) {
+        res.status(400).send({ message: error.message });
+    }
+}
+
+export const getFollowers = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const user = await User.findById(id);
+        if (!user) return res.status(404).send({ message: 'User not found' });
+        res.status(200).send({ result: user.followers });
+        
     } catch (error) {
         res.status(400).send({ message: error.message });
     }

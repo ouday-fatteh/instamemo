@@ -85,3 +85,10 @@
     gap: 1rem;
     border-radius: 8px;
 }
+.ChatBubble_overlay div{
+    padding: 0px 0px ;
+}
+.BubbleHolder__main{
+    height: 300px;
+    width: 250px;
+}

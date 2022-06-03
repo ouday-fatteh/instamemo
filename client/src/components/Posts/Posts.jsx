@@ -34,6 +34,7 @@ const Posts = (props) => {
       }
       }
     }
+    console.log(posts);
     
     
     

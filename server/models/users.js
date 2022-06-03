@@ -49,12 +49,10 @@ const userSchema = new mongoose.Schema({
         default:''
     },
     following: {
-        type: [String],
-        default:''
+        type: [String]
     },
     followers: {
-        type: [String],
-        default:''
+        type: [String]
     },
     hasFinishedSignUp : {
         type: Boolean,

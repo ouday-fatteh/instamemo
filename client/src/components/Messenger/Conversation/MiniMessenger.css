@@ -1,0 +1,8 @@
+.minimessenger__main {
+    position: relative;
+    margin: 0 0;
+    background-color: white;
+    height: 300px;
+    width: 250px;
+    border: 1px solid red;
+}

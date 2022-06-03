@@ -50,3 +50,12 @@ export const unfollowUser = (id,unfollower_id) => async (dispatch) => {
         console.log(error);
     }
 }
+
+export const getFollowers = (id) => async (dispatch) => {
+    try {
+        const { data } = await api.getFollowers(id);
+        dispatch({ type: 'GET_FOLLOWERS', payload: data });
+    } catch (error) {
+        console.log(error);
+    }
+}

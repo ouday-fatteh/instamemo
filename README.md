@@ -11,3 +11,17 @@ A MERN stack instagram clone
 
 PROJECT STILL UNDER DEVELOPEMENT
 
+TODO: - Fix the posts state getting overwritten after loading (State management problem)
+      - Fix the list of contacts (State management problem)
+      - Implementing the chat system 
+      - Fixing input validation (login , register , finishingSIgnUp)
+      - Implement loading on Logout,login,register
+      - Changing form UI on Login,Register
+      - Implementing Groups,Pages,Group chats
+      - Adding Settings,Display,Privacy,Edit Profile sections
+      - Implementing Hide,Report Post options
+      // Far Future :
+      - Adding Voice notes in comments
+      - Adding Video/audio chat (voice notes included)
+      - Live stream support
+      - Music player (Spotify account needed)

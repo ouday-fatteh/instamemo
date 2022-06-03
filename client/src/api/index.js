@@ -9,6 +9,8 @@ API.interceptors.request.use((req) => {
     return req;
 });
 
+
+//Posts API
 export const fetchPosts = (page) => API.get(`/posts?page=${page}`);
 export const createPosts = (newPost) => API.post('/posts',newPost);
 export const updatePosts = (id,updatedPost) => API.patch(`/posts/${id}`,updatedPost);
@@ -18,12 +20,19 @@ export const deletePosts = (id) => API.delete(`/posts/${id}`);
 export const deleteImage = (id,type) => API.delete(`/posts/image/${id}?type=${type}`);
 export const fetchPost = (id) => API.get(`/post/${id}`);
 
-
+//User API
 export const signin = (formData) => API.post('/user/signin',formData);
 export const signup = (formData) => API.post('/user/signup',formData);
 export const finishingSignUp = (formData,user_id) => API.patch(`/user/finishingsignup/${user_id}`,formData);
 export const followUser = (id,followerId) => API.post(`/user/follow/${id}?followerId=${followerId}`);
 export const unfollowUser = (id,unfollowerId) => API.delete(`/user/unfollow/${id}?unfollowerId=${unfollowerId}`);
-
 export const getUser = (id) => API.get(`/user/user/${id}`);
+export const getFollowers = (id) => API.get(`/user/followers/${id}`);
+
+//Chat API
+export const sendMessage = (sender,receiver,message) => API.post(`/chat/sendmessage`,{sender,receiver,message});
+export const getConversations = (user_id) => API.get(`/chat/getconversations/${user_id}`);
+export const getConversation = (sender,reciever) => API.get(`/chat/getconversation`,{sender,reciever});
+
+
 
