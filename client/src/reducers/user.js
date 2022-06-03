@@ -1,6 +1,11 @@
 import { GET_USER } from "../constants/actionTypes";
 
-const user = (state = {user:[]}, action) => {
+let state = [
+    user:null,
+    isLoading:true
+];
+
+export const user = (action) => {
     switch (action.type) {
         case GET_USER:
         return action.payload;
@@ -13,4 +18,3 @@ const user = (state = {user:[]}, action) => {
     }
     }
 
-    export default user;
