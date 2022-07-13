@@ -1,0 +1,36 @@
+.message__main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+    padding: 10px 5px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 12px;
+}
+.message__combo {
+    display: flex;
+    gap:.5rem;
+}
+.message__timestamp {
+    font-size: 9px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color:#5c5c5c;
+}
+.message__sender_picture{
+    width: 20px;
+    height: 20px;
+    border-radius: 8px;
+    background-color: #dbdbdb;
+    flex-grow: 0;
+}
+.message__content{
+    display: block;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 20px;
+    background-color: #dbdbdb;
+    padding: 5px 5px;
+}

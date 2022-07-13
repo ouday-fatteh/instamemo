@@ -1,6 +1,6 @@
 import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE , START_LOADING , END_LOADING ,CREATE_COMMENT} from '../constants/actionTypes';
 
-const posts = (state = {isLoading : true , posts :  []}, action) => {
+const posts = (state = {isLoading : true , posts :  [], followers:[]}, action) => {
   switch (action.type) {
     case START_LOADING:
       return { ...state, isLoading: true };
@@ -11,6 +11,11 @@ const posts = (state = {isLoading : true , posts :  []}, action) => {
         ...state,
         posts : action.payload.data,
         totalPosts : action.payload.totalPosts
+      };
+    case 'GET_FOLLOWERS':
+      return {
+        ...state,
+        followers : action.payload
       };
     case LIKE:
       return {...state,posts : state.posts.map((post) => (post._id === action.payload._id ? action.payload : post))};

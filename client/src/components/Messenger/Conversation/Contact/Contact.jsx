@@ -3,35 +3,34 @@ import { MdWavingHand } from "react-icons/md";
 import { IconContext } from 'react-icons';
 import { Popover } from 'antd';
 import { useEffect, useState } from 'react';
-import { useSelector , useDispatch } from 'react-redux';
 import ActiveConversation from '../ActiveConversation/ActiveConversation';
-import { getUser } from '../../../../actions/users';
+import * as API from '../../../../api';
 
 const Contact = (props) => {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user?.user);
+  const [user,setUser] = useState(null);
   const [visible, setVisible] = useState(false);
-
-  const hide = () => {
-      setVisible(false);
-    };
 
     const handleVisibleChange = (newVisible) => {
       setVisible(newVisible);
     };
 
     useEffect(() => {
-      dispatch(getUser(props.userId));
-    }, [dispatch, props.userId]);
+      API.getUser(props.userId).then((res) => {
+        setUser(res.data.result);
+    })
+    }, [props.userId]);
+  
   return (
     <Popover
     placement='left'
     content={<div className='BubbleHolder__main'>
       <ActiveConversation 
       receiverId={props.userId}
-      receiverPic={user?.result?.imageUrl}
-      receiverName={user?.result?.name}
+      receiverPic={user?.imageUrl}
+      receiverName={user?.name}
+      senderId={props?.currentUserId}
       mini={true}
+      socket={props.socket}
       />
       </div>}
     overlayClassName='ChatBubble_overlay'
@@ -44,11 +43,11 @@ const Contact = (props) => {
               <div className="contact__profile_image">
                 <img 
                 style={{width: '100%', height: '100%',borderRadius: '8px'}}
-                 src={user?.result?.imageUrl}
+                 src={user?.imageUrl}
                   alt="profile_image" />
                 </div>
                 <div className="contact__name">
-                    {user?.result?.name}
+                    {user?.name}
                 </div>
              </div>
                 { props.isHome && <div className="contact__send_message">
@@ -58,7 +57,9 @@ const Contact = (props) => {
                     </IconContext.Provider>
                   </div>
                   </div>}
+                  {props.isOnline ? 
                 <div className='contact__online_status'></div>
+                  :<div className='contact__offline_status'></div>}
     </div>
     </Popover>
   )

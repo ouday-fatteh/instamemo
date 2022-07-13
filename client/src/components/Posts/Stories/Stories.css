@@ -1,0 +1,10 @@
+.Stories__main-container {
+  display: block;
+  margin-top: 20px;
+  width: 100%;
+}
+.Stories__wrapper {
+  display: flex;
+  gap: 0.5rem;
+  width: max-content;
+}

@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 
 const conversationSchema = new mongoose.Schema({
-    participants: [{
-        type: [String],
+    participants: {
+        type: Array,
         required: true
-    }],
+    },
     messages: [{
         sender: {
             type: String,

@@ -1,6 +1,6 @@
 import { GET_USER } from "../constants/actionTypes";
 
-const user = (state = {user:[]}, action) => {
+const user = (state = [], action) => {
     switch (action.type) {
         case GET_USER:
         return action.payload;

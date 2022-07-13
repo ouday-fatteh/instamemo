@@ -37,6 +37,15 @@
     border-radius: 50%;
     background-color: lime;
 }
+.contact__offline_status {
+    position:absolute;
+    left: 30px;
+    bottom: 5px;
+    width:6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #dbdbdb;
+}
 .contact__send_message {
     display: none;
     align-items: center;

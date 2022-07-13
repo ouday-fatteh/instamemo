@@ -32,7 +32,6 @@ export const getFollowers = (id) => API.get(`/user/followers/${id}`);
 //Chat API
 export const sendMessage = (sender,receiver,message) => API.post(`/chat/sendmessage`,{sender,receiver,message});
 export const getConversations = (user_id) => API.get(`/chat/getconversations/${user_id}`);
-export const getConversation = (sender,reciever) => API.get(`/chat/getconversation`,{sender,reciever});
-
+export const getConversation = (sender,receiver) =>  API.get(`/chat/getconversation/${sender}?receiverId=${receiver}`);
 
 

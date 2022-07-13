@@ -11,9 +11,9 @@ A MERN stack instagram clone
 
 PROJECT STILL UNDER DEVELOPEMENT
 
-TODO: - Fix the posts state getting overwritten after loading (State management problem)
-      - Fix the list of contacts (State management problem)
-      - Implementing the chat system 
+TODO: - Fix the posts state getting overwritten after loading (State management problem) ----SOLVED----
+      - Fix the list of contacts (State management problem)                              ----SOLVED----
+      - Implementing the chat system                                                     ----ONGOING----
       - Fixing input validation (login , register , finishingSIgnUp)
       - Implement loading on Logout,login,register
       - Changing form UI on Login,Register

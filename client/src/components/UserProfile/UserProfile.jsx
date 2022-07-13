@@ -15,7 +15,7 @@ const UserProfile = () => {
     
     const dispatch = useDispatch();
     const location = useLocation(); 
-    const userprofile = useSelector(state => state.user.user) ; 
+    const userprofile = useSelector(state => state.user) ; 
     const user = JSON.parse(localStorage.getItem('profile')) ;
     const [isFollowing, setIsFollowing] = useState(userprofile?.result?.followers.includes(user?.result._id));
     

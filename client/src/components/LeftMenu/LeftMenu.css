@@ -1,151 +1,154 @@
-.LeftMenu__main{
-    display: flex;
-    position: sticky;
-    top: 65px;
-    margin-left: 35px;
-    width:18%;
-    height: 95vh;
-    padding: 20px 0px;
-    flex-direction: column;
-    gap:1.5rem;
+.LeftMenu__main {
+  display: flex;
+  position: sticky;
+  top: 65px;
+  margin-left: 35px;
+  width: 18%;
+  height: 95vh;
+  padding: 20px 0px;
+  flex-direction: column;
+  gap: 1.5rem;
 }
-@media screen and (max-width:600px){
-    .LeftMenu__main{display:none}
+@media screen and (max-width: 600px) {
+  .LeftMenu__main {
+    display: none;
+  }
 }
 .LeftMenu__profile {
-    display: flex;
-    flex-direction: column;
-    gap:0.5em;
-    background-color: white;
-    height: 15%;
-    border-radius: 8px;
-    padding:10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  background-color: white;
+  height: 15%;
+  border-radius: 8px;
+  padding: 10px 10px;
 }
 .LeftMenu__menu {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    height: 40%;
-    border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  height: 40%;
+  border-radius: 8px;
 }
 
 .LeftMenu__invitations {
-    position: relative;
-    background-color: white;
-    height: 30%;
-    border-radius: 8px;
-    transition:0.2s;
-    overflow: hidden;
+  position: relative;
+  background-color: white;
+  height: 30%;
+  border-radius: 8px;
+  transition: 0.2s;
+  overflow: hidden;
 }
-.LeftMenu__invitations:hover .LeftMenu__ad_overlay{
-    opacity:1;
-    transform: translate(0%, -100%);
+.LeftMenu__invitations:hover .LeftMenu__ad_overlay {
+  opacity: 1;
+  transform: translate(0%, -100%);
 }
-.LeftMenu__profile__info{
-    display: flex;
-    justify-content: space-between;
+.LeftMenu__profile__info {
+  display: flex;
+  justify-content: space-between;
 }
-.LeftMenu__profile__image{
-    width: 30px;
-    height: 30px;
-    border-radius:8px;
-    object-fit: contain;
-    
+.LeftMenu__profile__image {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  object-fit: contain;
 }
-.LeftMenu__profile__image-img{
-    width: 100%;
-    height: 100%;
-    border-radius:8px;
-    object-fit: contain;
+.LeftMenu__profile__image-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
 }
-.LeftMenu__profile__image-text{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    color: #ffffff;
-    height: 100%;
-    width: 100%;
-    border-radius: 8px;
-    background-color: rgb(35, 6, 139);
+.LeftMenu__profile__image-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: #ffffff;
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  background-color: rgb(35, 6, 139);
 }
-.LeftMenu__profile__name-prof{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    width: 80%;
-    
+.LeftMenu__profile__name-prof {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 80%;
 }
 .LeftMenu__profile__name {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width:100%;
-    height: 30px;
-    border-radius: 4px;
-
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 30px;
+  border-radius: 4px;
 }
-.LeftMenu__profile__profession{
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width:100%;
-    height: 30px;
-    border-radius: 4px;
-  
+.LeftMenu__profile__profession {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 30px;
+  border-radius: 4px;
 }
-.LeftMenu__ad_background{
-    width: 100%;
-    height: 100%;
+.LeftMenu__ad_background {
+  width: 100%;
+  height: 100%;
 }
 .LeftMenu__ad_overlay {
-    display: flex;
-    opacity:0.8;
-    flex-direction: column;
-    color:white;
-    gap:0.25rem;
-    padding:15px 15px;
-    padding-top: 50px;
-    width: 100%;
-    height: 100%;
-    border-radius: 8px;
-    background: linear-gradient(180deg, rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 30%, rgba(0,0,0,1) 100%);
-    transform: translate(0%, -60%);
-    transition: 0.5s;
+  display: flex;
+  opacity: 0.8;
+  flex-direction: column;
+  color: white;
+  gap: 0.25rem;
+  padding: 15px 15px;
+  padding-top: 50px;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.5) 30%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  transform: translate(0%, -60%);
+  transition: 0.5s;
 }
-#image__ad_holder{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
+#image__ad_holder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
 }
 .LeftMenu__ad_overlay_buttons {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.LeftMenu__ad_overlay_button-1{
-    color:white;
-    background-color:rgb(30, 90, 255);
-    border:none;
-    height: 30px;
-    width:45%;
-    border-radius:20px;
-    outline: none;
-    padding:0px 10px;
-    cursor: pointer;
+.LeftMenu__ad_overlay_button-1 {
+  color: white;
+  background-color: rgb(30, 90, 255);
+  border: none;
+  height: 30px;
+  width: 45%;
+  border-radius: 20px;
+  outline: none;
+  padding: 0px 10px;
+  cursor: pointer;
 }
-.LeftMenu__ad_overlay_button-2{
-    color:white;
-    background-color:rgb(146, 146, 146);
-    border:none;
-    height: 30px;
-    width:45%;
-    border-radius:20px;
-    outline: none;
-    padding:0px 10px;
-    cursor: pointer;
+.LeftMenu__ad_overlay_button-2 {
+  color: white;
+  background-color: rgb(146, 146, 146);
+  border: none;
+  height: 30px;
+  width: 45%;
+  border-radius: 20px;
+  outline: none;
+  padding: 0px 10px;
+  cursor: pointer;
 }
